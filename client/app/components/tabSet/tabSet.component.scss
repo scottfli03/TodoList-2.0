@@ -1,0 +1,19 @@
+.tab-selector {
+  padding-left: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+    li {
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 6px 6px 0 0;
+      padding: 5px 20px 0px 20px;
+      display: inline;
+      background-color: #eefca5;
+      margin-bottom: 0px;
+  }
+}
+
+.tab-selector > li.active {
+  background-color: #e4fca5;
+  border-bottom: thick solid #e4fca5;
+}

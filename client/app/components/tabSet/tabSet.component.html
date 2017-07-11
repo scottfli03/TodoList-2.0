@@ -1,0 +1,8 @@
+<ul class="tab-selector">
+  <li ng-repeat="tab in $ctrl.tabs" 
+    ng-class="{ active: tab.active }" 
+    ng-click="$ctrl.selectTab(tab)">
+    {{tab.header}}
+  </li>
+</ul>
+<ng-transclude></ng-transclude>

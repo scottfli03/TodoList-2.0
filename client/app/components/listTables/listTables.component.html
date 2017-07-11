@@ -1,0 +1,27 @@
+<div ng-switch="$ctrl.listType">
+  <ul class="lists" ng-switch-when="incomplete">
+    <!-- <div ng-if="($ctrl.list.listItems.length > 0 || $ctrl.list.isNew)"> -->
+    <incomplete-list-form
+      list="list" 
+      list-type="$ctrl.listType"
+      add-list-item="$ctrl.addListItem()"
+      remove-list="$ctrl.removeList()" 
+      remove-list-item="$ctrl.removeListItem()" 
+      update-list-item="$ctrl.updateListItem()" 
+      toggle-completed="$ctrl.toggleCompleted()" 
+      ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
+    </incomplete-list-form>
+    <!-- </div>      -->
+  </ul>
+  <ul class="lists" ng-switch-when="completed">
+    <completed-list-form
+        list="list"
+        list-type="$ctrl.listType"
+        remove-list="$ctrl.removeList()" 
+        remove-list-item="$ctrl.removeListItem()" 
+        update-list-item="$ctrl.updateListItem()" 
+        toggle-completed="$ctrl.toggleCompleted()" 
+        ng-repeat="list in $ctrl.lists | filter: {listItems: {completed: true}}">
+    </completed-list-form>      
+  </ul>
+</div>

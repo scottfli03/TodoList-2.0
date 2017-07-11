@@ -1,0 +1,72 @@
+ul {
+  list-style-type:  none;
+  li {
+    #list_title {
+      margin-top: 10px;
+      font-weight: bold;
+      font-family: 'arial';
+    }
+  }
+}
+
+table.listTable, tr.listTR, th.listTH, td.listTD {
+  border-style: solid;
+  border-width: 1px;
+  border-collapse: collapse;
+  margin: 5px 3px 5px 3px;
+  width: auto;
+  background-color: #f3f7dd;
+}
+
+td {
+  border-width: 1px;
+  border-style: solid;
+  border-collapse: collapse;
+  &.listTD {
+    text-align: left;
+  }
+
+  /* Checkbox Column */ 
+  &.checkCol {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    vertical-align: center;
+  }
+
+  &.corner-symbol {
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    vertical-align: center;
+    border-top-width: 2px;
+  }
+
+  /* New Item row */
+  &.newItemTD {
+    padding:5px 5px 5px 5px;
+    background-color: #f3f7dd;
+    border-top-width: 2px;
+  }
+}
+
+td.listTD, th.listTH {
+  padding: 10px 5px 10px 5px;
+}
+
+th {
+  &.listTH {
+    text-align: center;
+    vertical-align: center;
+  }
+  &.formTH {
+    text-align: left;
+  }
+}
+
+#listsForm {
+  margin-bottom: 2em;
+}
+
+

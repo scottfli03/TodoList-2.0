@@ -1,0 +1,30 @@
+[	
+  {"title":"Hygiene Products", 
+  "isNew":false,
+  "listItems": [
+    {"title": "Soap", 
+    "description": "Kind that smells good.",
+    "isSelected": true, 
+    "completed": false},
+    {"title": "Comb", 
+    "description": "A giant one!", 
+    "isSelected": false,
+    "completed": false},
+    {"title": "Shaving cream", 
+    "description": "Sensitive Skin",
+    "isSelected": false, 
+    "completed": false}]},
+  {"title": "School Supplies",
+  "isNew": false,
+  "listItems": [
+    {"title": "Computer", 
+    "description": "Laptop",
+    "isSelected": false, 
+    "completed": false},
+    {"title": "Notebooks", 
+    "description": "Just in case you take notes by hand.",
+    "isSelected": true, 
+    "completed": true}]}
+]
+
+
