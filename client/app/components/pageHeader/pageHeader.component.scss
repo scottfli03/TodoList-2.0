@@ -1,0 +1,19 @@
+h1 {
+  background-color: inherit;
+  padding: .3em 0 .1em .3em;
+  margin: 0 0 0 0;
+  font-size: 4em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+nav {
+  border-collapse: collapse;
+  padding-left: .3em;
+  li {
+    display: inline-block;
+    border-style: solid;
+    font-size: 1.2em;
+    padding: .2em .3em .1em .3em;
+    margin: 0 0px 0 0px;
+  }
+}
