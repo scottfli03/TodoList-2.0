@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<div ng-switch="$ctrl.listType">
-  <ul class="lists" ng-switch-when="incomplete">
+<div>
+  <ul class="lists">
     <!-- <div ng-if="($ctrl.list.listItems.length > 0 || $ctrl.list.isNew)"> -->
-    <incomplete-list-form
+    <lists-form
       list="list"
       list-type="$ctrl.listType"
       add-list-item="$ctrl.addListItem()"
@@ -11,10 +11,10 @@
       update-list-item="$ctrl.updateListItem()"
       toggle-completed="$ctrl.toggleCompleted()"
       ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
-    </incomplete-list-form>
+    </lists-form>
     <!-- </div>      -->
   </ul>
-  <ul class="lists" ng-switch-when="completed">
+  <!-- <ul class="lists">
     <completed-list-form
         list="list"
         list-type="$ctrl.listType"
@@ -24,5 +24,5 @@
         toggle-completed="$ctrl.toggleCompleted()"
         ng-repeat="list in $ctrl.lists | filter: {listItems: {completed: true}}">
     </completed-list-form>
-  </ul>
+  </ul> -->
 </div>

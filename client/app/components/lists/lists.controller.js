@@ -22,7 +22,6 @@ class listsController {
           return !list.listItems.completed || list.isNew;
         };
       };
-
       self.loadListData = function() {
         self.lists = $localStorage.lists;
       };
