@@ -34,6 +34,15 @@ angular.module('app', [
       listType: 'incomplete'
     }
   }
+  var completedState = {
+    name: 'completed',
+    url: '/completed',
+    component: 'lists',
+    data: {
+      listType: 'completed'
+    }
+  }
   $stateProvider.state(homeState);
   $stateProvider.state(incompleteState);
+  $stateProvider.state(completedState);
 }]);

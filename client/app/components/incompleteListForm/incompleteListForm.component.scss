@@ -1,3 +1,7 @@
+#listsForm {
+  margin-bottom: 1em;
+}
+
 ul {
   list-style-type:  none;
   li {
@@ -25,8 +29,11 @@ td {
   &.listTD {
     text-align: left;
   }
+  &.title {
+    min-width: 100px;
+  }
 
-  /* Checkbox Column */ 
+  /* Checkbox Column */
   &.checkCol {
     padding-left: 10px;
     padding-right: 10px;
@@ -65,8 +72,8 @@ th {
   }
 }
 
-#listsForm {
-  margin-bottom: 1em;
+input[type=text] {
+	border-color: #f3f7dd;
+	background-color: #f3f7dd;
+  width: 100%;
 }
-
-
