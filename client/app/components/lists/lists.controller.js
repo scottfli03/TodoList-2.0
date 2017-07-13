@@ -1,15 +1,17 @@
 class listsController {
-    constructor($scope, $http, $localStorage) {
+    constructor($scope, $http, $localStorage, $state) {
       this.name = 'lists';
       var self = this;
+      self.listType = $state.current.data.listType;
       console.log("Entered Lists Controller");
+      console.log(self.listType);
       // delete $localStorage.lists;
       self.getLists = function() {
         if (typeof $localStorage.lists === "undefined") {
           $http.get('assets/json/lists.json').then(function(res){
             console.log("Attempting to access data.");
             self.lists = res.data;
-            self.saveListData();           
+            self.saveListData();
           });
         } else {
           self.lists = localStorage.lists;
@@ -88,7 +90,7 @@ class listsController {
             theList.listItems[a].isSelected = false;
           }
         }
-      };  
+      };
       self.getLists();
       if (typeof $localStorage.lists !== "undefined") {
         self.loadListData();
