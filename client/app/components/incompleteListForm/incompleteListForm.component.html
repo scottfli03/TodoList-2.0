@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <form name="listSetForm{{$index}}" novalidate id="listsForm">
   <li id="titleListItem">
     <label id="list_title">{{$ctrl.list.title}}</label>
@@ -22,7 +23,7 @@
         <td class="listTD title"><label class="cellListData">{{listItem.title}}</label></td>
         <td class="listTD desc"><label class="cellListData">{{listItem.description}}</label></td>
         <td class="listTD action">
-          <a href ng-click="$ctrl.removeListItem($ctrl.list, listItem)">remove</a>
+          <a href ng-click="$ctrl.removeListItem()($ctrl.list, listItem)">remove</a>
         </td>
       </tr>
       <tr>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <form name="listSetForm{{$index}}" novalidate id="listsForm">
   <li id="titleListItem">
     <label id="list_title">{{$ctrl.list.title}}</label>
@@ -9,13 +10,13 @@
         <th class="listTH">Description</th>
         <th class="listTH">Remove</th>
       </tr>
-      <tr class="list" 
-        ng-repeat="listItem in $ctrl.list.listItems" 
+      <tr class="list"
+        ng-repeat="listItem in $ctrl.list.listItems"
         ng-hide="listItem.completed===false">
         <td class="checkCol">
-          <input type="checkbox" 
-            id="chkIsSelected" 
-            ng-checked="{{listItem.isSelected}}" 
+          <input type="checkbox"
+            id="chkIsSelected"
+            ng-checked="{{listItem.isSelected}}"
             ng-model="listItem.isSelected"
             ng-click="$ctrl.updateListItem()($ctrl.list, listItem)" />
         </td>
@@ -26,8 +27,8 @@
         </td>
       </tr>
     </table>
-    <input type="submit" 
-      name="setIncompletedBtn" 
+    <input type="submit"
+      name="setIncompletedBtn"
       class="toggleBtn"
       ng-click="$ctrl.toggleCompleted()($ctrl.listType, $ctrl.list)"
       value="Move to Incomplete" />
