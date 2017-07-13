@@ -18,10 +18,12 @@
         list="list"
         list-type="$ctrl.listType"
         remove-list="$ctrl.removeList()"
-        remove-list-item="$ctrl.removeListItem()" 
+        remove-list-item="$ctrl.removeListItem()"
         update-list-item="$ctrl.updateListItem()"
         toggle-completed="$ctrl.toggleCompleted()"
         ng-repeat="list in $ctrl.lists | filter: {listItems: {completed: true}}">
     </completed-list-form>
   </ul>
 </div>
+
+<!-- test -->
