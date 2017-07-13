@@ -1,28 +1,13 @@
 <!DOCTYPE html>
-<div>
-  <ul class="lists">
-    <!-- <div ng-if="($ctrl.list.listItems.length > 0 || $ctrl.list.isNew)"> -->
-    <lists-form
-      list="list"
-      list-type="$ctrl.listType"
-      add-list-item="$ctrl.addListItem()"
-      remove-list="$ctrl.removeList()"
-      remove-list-item="$ctrl.removeListItem()"
-      update-list-item="$ctrl.updateListItem()"
-      toggle-completed="$ctrl.toggleCompleted()"
-      ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
-    </lists-form>
-    <!-- </div>      -->
-  </ul>
-  <!-- <ul class="lists">
-    <completed-list-form
-        list="list"
-        list-type="$ctrl.listType"
-        remove-list="$ctrl.removeList()"
-        remove-list-item="$ctrl.removeListItem()"
-        update-list-item="$ctrl.updateListItem()"
-        toggle-completed="$ctrl.toggleCompleted()"
-        ng-repeat="list in $ctrl.lists | filter: {listItems: {completed: true}}">
-    </completed-list-form>
-  </ul> -->
-</div>
+<ul class="lists">
+  <lists-form
+    list="list"
+    list-type="$ctrl.listType"
+    add-list-item="$ctrl.addListItem()"
+    remove-list="$ctrl.removeList()"
+    remove-list-item="$ctrl.removeListItem()"
+    update-list-item="$ctrl.updateListItem()"
+    toggle-completed="$ctrl.toggleCompleted()"
+    ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
+  </lists-form>
+</ul>

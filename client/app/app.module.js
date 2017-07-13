@@ -42,7 +42,13 @@ angular.module('app', [
       listType: 'completed'
     }
   }
+  var aboutState = {
+    name: 'about',
+    url: '/about',
+    component: 'about',
+  }
   $stateProvider.state(homeState);
   $stateProvider.state(incompleteState);
   $stateProvider.state(completedState);
+  $stateProvider.state(aboutState);
 }]);
