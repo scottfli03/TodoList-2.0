@@ -7,12 +7,14 @@
   remove-list-item="$ctrl.removeListItem"
   update-list-item="$ctrl.updateListItem"
   toggle-completed="$ctrl.toggleCompleted"
+  toggle-visible="$ctrl.toggleVisible"
   list-type="$ctrl.listType">
 </list-tables>
 <div ng-hide="$ctrl.listType==='completed'">
   <div id="formSeperator"></div>
   <div id="newListForm">
     <new-list-form
+      list-title="$ctrl.listTitle"
       add-list="$ctrl.addList">
     </new-list-form>
   </div>

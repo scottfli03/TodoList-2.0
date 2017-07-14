@@ -5,10 +5,21 @@
 ul {
   list-style-type:  none;
   li {
-    #list_title {
       margin-top: 10px;
-      font-weight: bold;
       font-family: 'arial';
+    .display-inline {
+      display: inline-block;
+      #toggle-visible {
+        a {
+          float:left;
+          margin-right: .5em;
+          text-decoration: none;
+          font-weight: lighter;
+        }
+        a:hover {
+          color: blue;
+        }
+      }
     }
   }
 }

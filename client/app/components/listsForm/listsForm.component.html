@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <form name="listSetForm{{$index}}" novalidate id="listsForm">
   <li id="titleListItem">
-    <label id="list_title">{{$ctrl.list.title}}</label>
-    <input type="submit" ng-click="$ctrl.removeList()($ctrl.list)" value="Delete List" />
-    <table class="listTable">
+    <div class="display-inline">
+      <div id="toggle-visible" ng-switch="$ctrl.list.visible">
+        <a href ng-switch-when="true" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
+        <a href ng-switch-when="false" ng-click="$ctrl.toggleVisible()($ctrl.list)">show</a>
+        <a href ng-switch-when="undefined" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
+      </div>
+      <label id="list_title">  {{$ctrl.list.title}}</label>
+      <input type="submit" ng-click="$ctrl.removeList()($ctrl.list)" value="Delete List" />
+    </div>
+    <table ng-if="$ctrl.list.visible" class="listTable">
+
       <tr class="listTR">
         <th class="listTH">&#10003;</th>
         <th class="listTH">Title</th>
@@ -46,7 +54,7 @@
     </table>
   </li>
   <!-- On when incomplete list -->
-  <div class="when-incomplete" ng-hide="$ctrl.listType==='completed'">
+  <div class="when-incomplete" ng-hide="$ctrl.listType==='completed' || $ctrl.list.visible===false">
     <input type="submit"
       name="setCompletedBtn"
       class="toggleBtn"
@@ -59,7 +67,7 @@
     </span>
   </div>
   <!-- On when completed list -->
-  <div class="when-completed" ng-hide="$ctrl.listType==='incomplete'">
+  <div class="when-completed" ng-hide="$ctrl.listType==='incomplete' || $ctrl.list.visible===false">
     <input type="submit"
       name="setIncompleteBtn"
       class="toggleBtn"

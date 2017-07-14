@@ -12,6 +12,7 @@ let listsFormComponent = {
     removeListItem: '&',
     updateListItem: '&',
     toggleCompleted: '&',
+    toggleVisible: '&',
     listType: '<'
   },
   template,

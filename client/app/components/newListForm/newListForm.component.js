@@ -5,6 +5,7 @@ import './newListForm.component.scss';
 let newListFormComponent = {
   restrict: 'E',
   bindings: {
+    listTitle: '<',
     addList: '&'
   },
   template,

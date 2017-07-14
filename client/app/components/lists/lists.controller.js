@@ -2,6 +2,7 @@ class listsController {
     constructor($scope, $http, $localStorage, $state) {
       this.name = 'lists';
       var self = this;
+      self.listTitle = "";
       self.listType = $state.current.data.listType;
       console.log("Entered Lists Controller");
       console.log(self.listType);
@@ -17,6 +18,20 @@ class listsController {
           self.lists = localStorage.lists;
         }
       };
+
+      self.toggleVisible = function(list) {
+        if (list.visible === undefined) {
+          console.log("undefined to false");
+          list.visible = false;
+        } else if (list.visible) {
+          console.log("true to false");
+          list.visible = false;
+        } else {
+          console.log("false to true");
+          list.visible = true;
+        }
+      }
+
       self.incompleteFilter = function() {
         return function(list) {
           return !list.listItems.completed || list.isNew;
@@ -30,11 +45,13 @@ class listsController {
         $localStorage.lists = self.lists;
       };
 
-      self.addList = function(title) {
-        self.lists.push({title: title,
+      self.addList = function(listTitle) {
+        self.lists.push({title: listTitle,
           isNew: true,
           listItems: [],
+          visible: true
         });
+        self.listTitle = undefined;
       };
 
       self.removeList = function(list) {
@@ -48,6 +65,8 @@ class listsController {
         list.isNew = false;
         var newItemCopy = angular.copy(newItem);
         list.listItems.push(newItemCopy);
+        newItem.title = undefined;
+        newItem.description = undefined;
       };
 
       self.updateListItem = function(list, listItem) {
