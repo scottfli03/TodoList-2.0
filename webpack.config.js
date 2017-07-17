@@ -38,7 +38,9 @@ if (isDev) {
     plugins: [
 
       new webpack.ProvidePlugin({
-        'window.Masonry': 'Masonry'
+        'window.Masonry': 'Masonry',
+        $: 'jquery',
+        jQuery: 'jquery'
       }),
 
       // HtmlWebpackPlugin: Simplifies creation of HTML files to serve your webpack bundles : https://www.npmjs.com/package/html-webpack-plugin

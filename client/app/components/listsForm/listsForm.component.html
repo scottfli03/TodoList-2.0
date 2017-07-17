@@ -5,13 +5,13 @@
     listSetForm.$setPristine();" novalidate>
 <li id="titleListItem">
   <div class="display-inline">
-    <label id="list-title-if-hidden" ng-if="!$ctrl.list.visible">{{$ctrl.list.title}}</label>
     <div id="toggle-visible" ng-switch="$ctrl.list.visible">
       <a href ng-switch-when="true" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
       <a href ng-switch-when="false" ng-click="$ctrl.toggleVisible()($ctrl.list)">{{$ctrl.list.title}}</a>
       <a href ng-switch-when="undefined" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
     </div>
-    <a href ng-click="$ctrl.removeList()($ctrl.list)">Delete</a>
+    <a href ng-if="$ctrl.list.visible"
+      ng-click="$ctrl.removeList()($ctrl.list)">Delete</a>
   </div>
     <table ng-if="$ctrl.list.visible" class="listTable">
       <tr>

@@ -6,9 +6,9 @@ import './lists.component.scss';
 let listsComponent = {
   restrict: 'E',
   bindings: {
-    listType: '<',
+    listType: '<'
   },
   template,
-  controller: ['$scope', '$http', '$localStorage', '$state', thisController]
+  controller: ['$scope', '$http', '$localStorage', '$state', 'customConfirmModalService', thisController]
 };
 export default listsComponent;

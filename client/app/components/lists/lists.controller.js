@@ -1,11 +1,10 @@
 class listsController {
-    constructor($scope, $http, $localStorage, $state) {
+    constructor($scope, $http, $localStorage, $state, customConfirmModalService) {
       this.name = 'lists';
       var self = this;
+      console.log("Entered lists controller.");
       self.listTitle = "";
       self.listType = $state.current.data.listType;
-      console.log("Entered Lists Controller");
-      console.log(self.listType);
       // delete $localStorage.lists;
       self.getLists = function() {
         if (typeof $localStorage.lists === "undefined") {
@@ -21,13 +20,10 @@ class listsController {
 
       self.toggleVisible = function(list) {
         if (list.visible === undefined) {
-          console.log("undefined to false");
           list.visible = false;
         } else if (list.visible) {
-          console.log("true to false");
           list.visible = false;
         } else {
-          console.log("false to true");
           list.visible = true;
         }
       }
@@ -55,8 +51,10 @@ class listsController {
       };
 
       self.removeList = function(list) {
-        var index = self.lists.indexOf(list);
-        self.lists.splice(index, 1);
+        console.log(customConfirmModalService);
+        customConfirmModalService.customDeleteConfirm(list.title);
+        // var index = self.lists.indexOf(list);
+        // self.lists.splice(index, 1);
       };
 
       self.addListItem = function(list, newItem) {

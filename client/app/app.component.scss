@@ -15,5 +15,13 @@ header {
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
   border-bottom: solid #333 medium;
+}
 
+.modal-dialog {
+   position:fixed;
+   top:auto;
+   right:auto;
+   left:auto;
+   bottom:0;
+   margin-bottom: 0;
 }
