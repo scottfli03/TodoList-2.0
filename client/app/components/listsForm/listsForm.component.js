@@ -6,6 +6,7 @@ let listsFormComponent = {
   restrict: 'E',
   bindings: {
     list: '<',
+    newItem: '<',
     incompleteFilter: '&',
     addListItem: '&',
     removeList: '&',

@@ -2,13 +2,17 @@
   margin-bottom: 1em;
 }
 
+.error-notification {
+  color: red;
+}
+
 ul {
   list-style-type:  none;
   li {
       margin-top: 10px;
       font-family: 'arial';
     .display-inline {
-      display: inline-block;
+      display: inline;
       #toggle-visible {
         a {
           float:left;
@@ -81,10 +85,26 @@ th {
   &.formTH {
     text-align: left;
   }
+  &#list_title {
+    text-align: center;
+  }
 }
 
 input[type=text] {
 	border-color: #f3f7dd;
 	background-color: #f3f7dd;
-  width: 100%;
+  width: auto;
+
+  &#title.ng-dirty.ng-invalid {
+    outline-color: red;
+  }
+  &#desc.ng-dirty.ng-invalid {
+    outline-color: red;
+  }
+  &#title.ng-dirty.ng-valid {
+    outline-color: green;
+  }
+  &#desc.ng-dirty.ng-valid {
+    outline-color: green;
+  }
 }

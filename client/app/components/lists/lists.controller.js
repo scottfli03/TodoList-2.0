@@ -60,13 +60,15 @@ class listsController {
       };
 
       self.addListItem = function(list, newItem) {
+        console.log(newItem);
+        console.log(self.newItem);
         newItem.isSelected = false;
         newItem.completed = false;
         list.isNew = false;
         var newItemCopy = angular.copy(newItem);
         list.listItems.push(newItemCopy);
-        newItem.title = undefined;
-        newItem.description = undefined;
+        list.newItem.title = undefined;
+        list.newItem.description = undefined;
       };
 
       self.updateListItem = function(list, listItem) {

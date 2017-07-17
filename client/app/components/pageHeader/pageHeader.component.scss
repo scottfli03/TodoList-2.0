@@ -1,19 +1,18 @@
-h1 {
-  background-color: inherit;
-  padding: .3em 0 .1em .3em;
-  margin: 0 0 0 0;
-  font-size: 4em;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;
-}
-nav {
-  border-top: solid;
-  padding-left: 2em;
-  li {
+li {
     display: inline-block;
     background-color: inherit;
     font-size: 1.2em;
-    padding: .2em .3em .1em .3em;
+    padding: 0 .3em .1em .3em;
     margin: 0 0px 0 0px;
+    vertical-align: middle;
+    color: #333;
+}
+
+a {
+  text-decoration: none !important;
+  color: black;
+  &.ng-binding.active {
+    font-size: 2em;
+    color: #333;
   }
 }

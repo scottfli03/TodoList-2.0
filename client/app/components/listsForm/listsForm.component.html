@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<form name="listSetForm{{$index}}" novalidate id="listsForm">
-  <li id="titleListItem">
-    <div class="display-inline">
-      <div id="toggle-visible" ng-switch="$ctrl.list.visible">
-        <a href ng-switch-when="true" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
-        <a href ng-switch-when="false" ng-click="$ctrl.toggleVisible()($ctrl.list)">show</a>
-        <a href ng-switch-when="undefined" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
-      </div>
-      <label id="list_title">  {{$ctrl.list.title}}</label>
-      <input type="submit" ng-click="$ctrl.removeList()($ctrl.list)" value="Delete List" />
+<form name="listSetForm{{$index}}" id="listsForm"
+  ng-submit="listSetForm.$valid
+    && $ctrl.addListItem()($ctrl.list, $ctrl.list.newItem);
+    listSetForm.$setPristine();" novalidate>
+<li id="titleListItem">
+  <div class="display-inline">
+    <label id="list-title-if-hidden" ng-if="!$ctrl.list.visible">{{$ctrl.list.title}}</label>
+    <div id="toggle-visible" ng-switch="$ctrl.list.visible">
+      <a href ng-switch-when="true" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
+      <a href ng-switch-when="false" ng-click="$ctrl.toggleVisible()($ctrl.list)">{{$ctrl.list.title}}</a>
+      <a href ng-switch-when="undefined" ng-click="$ctrl.toggleVisible()($ctrl.list)">hide</a>
     </div>
+    <a href ng-click="$ctrl.removeList()($ctrl.list)">Delete</a>
+  </div>
     <table ng-if="$ctrl.list.visible" class="listTable">
-
+      <tr>
+        <th colspan="4" id="list_title">{{$ctrl.list.title}}</th>
+        </tr>
       <tr class="listTR">
         <th class="listTH">&#10003;</th>
         <th class="listTH">Title</th>
@@ -26,7 +31,7 @@
             id="chkIsSelected"
             ng-checked="{{listItem.isSelected}}"
             ng-model="listItem.isSelected"
-            ng-click="$ctrl.updateListItem()($ctrl.list, listItem)" />
+            ng-click="$ctrl.updateListItem()($ctrl.list, listItem); $ctrl.toggleCompleted()($ctrl.listType, $ctrl.list);" />
         </td>
         <td class="listTD"><label class="cellListData">{{listItem.title}}</label></td>
         <td class="listTD"><label class="cellListData">{{listItem.description}}</label></td>
@@ -36,42 +41,41 @@
       </tr>
       <!-- row hidden when completed list -->
       <tr ng-hide="$ctrl.listType==='completed'">
-        <td class="corner-symbol">+</td>
-        <td class="newItemTD">
-          <input type="text" name="txtTitle" ng-model="newItem.title" required>
-        </td>
-        <td class="newItemTD">
-          <input type="text" name="txtDesc" ng-model="newItem.description" required>
-        </td>
-        <td class="newItemTD">
-          <input type="submit"
-            class="newItemBtn"
-            name="btnNewItem"
-            ng-disabled="listSetForm.$invalid"
-            ng-click="$ctrl.addListItem()($ctrl.list, newItem)" />
-        </td>
+          <td class="corner-symbol">+</td>
+          <td class="newItemTD">
+            <input type="text" id="title" name="txtTitle" ng-model="$ctrl.list.newItem.title" required>
+          </td>
+          <td class="newItemTD">
+            <input type="text" id ="desc" name="txtDesc" ng-model="$ctrl.list.newItem.description" required>
+          </td>
+          <td class="newItemTD">
+            <input type="submit" class="newItemBtn" ng-disabled="!listSetForm.$valid"/>
+          </td>
       </tr>
     </table>
+    <span class="error-notification"
+      ng-if="listSetForm.txtTitle.$invalid
+        && listSetForm.txtTitle.$dirty
+        || listSetForm.txtDesc.$invalid
+        && listSetForm.txtDesc.$dirty">
+      Please enter a valid title and description.
+    </span>
   </li>
+</form>
+
   <!-- On when incomplete list -->
-  <div class="when-incomplete" ng-hide="$ctrl.listType==='completed' || $ctrl.list.visible===false">
+  <!-- <div class="when-incomplete" ng-hide="$ctrl.listType==='completed' || $ctrl.list.visible===false">
     <input type="submit"
       name="setCompletedBtn"
       class="toggleBtn"
       ng-click="$ctrl.toggleCompleted()($ctrl.listType, $ctrl.list)"
       value="Move to Completed" />
-    <span class="error-notification"
-      ng-hide="$ctrl.listType==='completed'"
-      ng-if="listSetForm.txtTitle.$invalid && listSetForm.txtTitle.$dirty || listSetForm.txtDesc.$invalid && listSetForm.txtDesc.$dirty">
-      Please include a valid title and description.
-    </span>
-  </div>
+  </div> -->
   <!-- On when completed list -->
-  <div class="when-completed" ng-hide="$ctrl.listType==='incomplete' || $ctrl.list.visible===false">
+  <!-- <div class="when-completed" ng-hide="$ctrl.listType==='incomplete' || $ctrl.list.visible===false">
     <input type="submit"
       name="setIncompleteBtn"
       class="toggleBtn"
       ng-click="$ctrl.toggleCompleted()($ctrl.listType, $ctrl.list)"
       value="Move to Incomplete" />
-    </div>
-</form>
+  </div> -->

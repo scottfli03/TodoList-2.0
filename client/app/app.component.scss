@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:700');
 
-#page-header {
-  margin-bottom: 0px;
-  padding-bottom: .05em;
-  text-align: center;
-  font-family: 'arial';
-  font-size: 3em;
-}
-
 body {
   margin-left: 3%;
   margin-right: 3%;
   background-color: #c3c7ae;
+}
+
+header {
+  background-color: inherit;
+  padding: .3em 0 .1em .3em;
+  margin: 0 0 0 0;
+  font-size: 4em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  border-bottom: solid #333 medium;
+
 }

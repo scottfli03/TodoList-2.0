@@ -4,8 +4,10 @@ import './pageHeader.component.scss';
 
 let pageHeaderComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    page: '<'
+  },
   template,
-  thisController
+  controller: thisController
 };
 export default pageHeaderComponent;

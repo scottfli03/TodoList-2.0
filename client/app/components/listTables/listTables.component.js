@@ -6,6 +6,7 @@ let listTablesComponent = {
   restrict: 'E',
   bindings: {
     lists: '<',
+    newItem: '<',
     incompleteFilter: '&',
     addListItem: '&',
     removeList: '&',

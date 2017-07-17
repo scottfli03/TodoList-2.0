@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<h1>TODO: List</h1>
-<nav>
-  <li><a ui-sref="incomplete" ui-sref-active="active">Incomplete</a></li
-  >|<li><a ui-sref="completed" ui-sref-active="active">Completed</a></li
+<!-- <nav>
+  <p>{{$ctrl.page.title}}</p>
+  <li><a ui-sref="{{$ctrl.page.urlExt}}" ui-sref-active="active">{{$ctrl.page.title}}</a></li
+  ><li><a  ui-sref="completed"
+            ui-sref-active="active"
+            >Completed</a></li
   >|<li><a ui-sref="about" ui-sref-active="active">About</a></li>
-</nav>
+</nav> -->
+<li><a ui-sref="{{$ctrl.page.urlExt}}" ui-sref-active="active">{{$ctrl.page.title}}</a></li
+>

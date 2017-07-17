@@ -23,7 +23,8 @@ angular.module('app', [
     url: '',
     component: 'lists',
     data: {
-      listType: 'incomplete'
+      listType: 'incomplete',
+      active: 'incomplete'
     }
   }
   var incompleteState = {
@@ -46,6 +47,9 @@ angular.module('app', [
     name: 'about',
     url: '/about',
     component: 'about',
+    data: {
+      listType: 'about'
+    }
   }
   $stateProvider.state(homeState);
   $stateProvider.state(incompleteState);
