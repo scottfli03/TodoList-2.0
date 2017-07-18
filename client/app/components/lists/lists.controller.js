@@ -1,10 +1,9 @@
 class listsController {
-    constructor($scope, $http, $localStorage, $state, customConfirmModalService) {
+    constructor($scope, $http, $localStorage, $state, $ngBootbox) {
       this.name = 'lists';
       var self = this;
-      console.log("Entered lists controller.");
-
       self.listTitle = "";
+      self.modalResponse = undefined;
       self.listType = $state.current.data.listType;
       // delete $localStorage.lists;
       self.getLists = function() {
@@ -52,26 +51,57 @@ class listsController {
       };
 
       self.removeList = function(list) {
-        console.log(customConfirmModalService);
-        customConfirmModalService.customDeleteConfirm(list.title);
-        // var index = self.lists.indexOf(list);
-        // self.lists.splice(index, 1);
+        $ngBootbox.confirm("Delete '" + list.title + "' list?")
+          .then(function() {
+            var index = self.lists.indexOf(list);
+            self.lists.splice(index, 1);
+          }, function() {
+            console.log("Ignore delete request.");
+          })
       };
-
+      
       self.addListItem = function(list) {
         var newItem = list.newItem;
         newItem.isSelected = false;
         newItem.completed = false;
+        newItem.editingTitle = false;
+        newItem.editingDesc = false;
         list.isNew = false;
         var newItemCopy = angular.copy(newItem);
+        console.log(newItemCopy);
         list.listItems.push(newItemCopy);
         list.newItem.title = undefined;
         list.newItem.description = undefined;
       };
 
+      self.toggleEdit = function(num, list, listItem) {
+        console.log("Called toggleEdit");
+        if (!listItem.editingTitle && num === 1) {
+          listItem.editingTitle = true;
+        } else if (!listItem.editingDesc && num === 2){
+          listItem.editingDesc = true;
+        } else {
+          listItem.editingTitle = false;
+          listItem.editingDesc = false;
+        }
+        self.updateListItem(list, listItem);
+      };
+
       self.updateListItem = function(list, listItem) {
+        console.log("new");
+        console.log(listItem);
         var listIndex = self.lists.indexOf(list);
         var itemIndex = list.listItems.indexOf(listItem);
+        console.log("old");
+        console.log(self.lists[listIndex].listItems[itemIndex]);
+        if (listItem.title === "") {
+          console.log("title");
+          listItem.title = self.lists[listIndex].listItems[itemIndex].title;
+        }
+        if (listItem.description === "") {
+          console.log("desc");
+          listItem.description = self.lists[listIndex].listItems[itemIndex].description;
+        }
         var listItemCopy = angular.copy(listItem);
         self.lists[listIndex].listItems[itemIndex] = listItem;
       };

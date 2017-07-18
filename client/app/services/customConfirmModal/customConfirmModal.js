@@ -1,7 +1,8 @@
 class customConfirmModalService {
-  constructor(ngBootbox) {
+  constructor($ngBootbox) {
     'ngInject';
     var self = this;
+    self.response = undefined;
     self.customDeleteConfirm = function(title) {
       var options = {
         message: "Are you sure you'd like to delete the '" + title + "' list?",
@@ -9,14 +10,17 @@ class customConfirmModalService {
         className: 'delete-modal',
         buttons: [{
           label: 'Yes',
-          value: 'yes'
+          value: 'yes',
+          callBack: function(result) {
+          }
         }, {
           label: 'No',
-          value: 'yes'
-        }],
-        callback: function(result) { console.log(result); }
+          value: 'yes',
+          callBack: function(result) {
+          }
+        }]
       }
-      ngBootbox.customDialog(options);
+      $ngBootbox.customDialog(options);
     }
   }
 }
