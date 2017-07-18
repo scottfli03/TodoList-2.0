@@ -1,5 +1,5 @@
 import template from './listsForm.component.html';
-import thisController from './listsForm.controller.js';
+import controller from './listsForm.controller.js';
 import './listsForm.component.scss';
 
 let listsFormComponent = {
@@ -17,6 +17,6 @@ let listsFormComponent = {
     listType: '<'
   },
   template,
-  thisController
+  controller
 };
 export default listsFormComponent;

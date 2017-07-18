@@ -1,6 +1,12 @@
 class listsFormController {
     constructor() {
-      this.name = 'listsForm';
+      var self = this;
+      self.name = 'listsForm';
+      self.addThisListItem = addThisListItem;
+
+      function addThisListItem(thisL) {
+        self.addListItem({'list': thisL});
+      }
     }
   }
 

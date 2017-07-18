@@ -17,6 +17,6 @@ let listTablesComponent = {
     listType: '<'
   },
   template,
-  thisController
+  controller: thisController
 };
 export default listTablesComponent;

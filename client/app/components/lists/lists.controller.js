@@ -3,6 +3,7 @@ class listsController {
       this.name = 'lists';
       var self = this;
       console.log("Entered lists controller.");
+
       self.listTitle = "";
       self.listType = $state.current.data.listType;
       // delete $localStorage.lists;
@@ -58,8 +59,7 @@ class listsController {
       };
 
       self.addListItem = function(list, newItem) {
-        console.log(newItem);
-        console.log(self.newItem);
+        var newItem = list.newItem;
         newItem.isSelected = false;
         newItem.completed = false;
         list.isNew = false;

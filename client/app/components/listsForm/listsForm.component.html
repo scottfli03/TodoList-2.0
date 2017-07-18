@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <form name="listSetForm{{$index}}" id="listsForm"
   ng-submit="listSetForm.$valid
-    && $ctrl.addListItem()($ctrl.list, $ctrl.list.newItem);
+    && $ctrl.addThisListItem($ctrl.list);
     listSetForm.$setPristine();" novalidate>
 <li id="titleListItem">
   <div class="display-inline">

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <form name="newListForm"
-  class="list-form"
-  ng-submit="newListForm.$valid && $ctrl.addList()($ctrl.listTitle) && newListForm.$setPristine()" novalidate>
-    <label>New List Title: </label><input type="text" class="txtListTitle" ng-model="$ctrl.listTitle" required />
-    <input type="submit" value="Submit" />
+      class="list-form"
+      ng-submit="$ctrl.addNewList($ctrl.listTitle)"
+      novalidate>
+      <!-- ng-submit="newListForm.$valid
+                && $ctrl.addNewList($ctrl.listTitle)
+                && newListForm.$setPristine()" -->
+    <label>New List Title: </label>
+    <input type="text"
+           name="listTitle"
+           class="txtListTitle"
+           ng-model="$ctrl.listTitle"
+           required />
+    <input type="submit"
+           value="Submit" />
 </form>
 <!---  TODO: Make lists component aware of title.
 Jeff said it should be passed down along with addList function. -->
