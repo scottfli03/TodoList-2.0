@@ -1,5 +1,5 @@
 import template from './newListForm.component.html';
-import thisController from './newListForm.controller.js';
+import controller from './newListForm.controller.js';
 import './newListForm.component.scss';
 
 let newListFormComponent = {
@@ -9,6 +9,6 @@ let newListFormComponent = {
     addList: '&'
   },
   template,
-  thisController
+  controller
 };
 export default newListFormComponent;

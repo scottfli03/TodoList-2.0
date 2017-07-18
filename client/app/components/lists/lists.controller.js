@@ -60,7 +60,12 @@ class listsController {
           })
       };
 
+<<<<<<< HEAD
       self.addListItem = function(list, newItem) {
+=======
+      self.addListItem = function(list) {
+        var newItem = list.newItem;
+>>>>>>> fb032ccf4f8c41fe6605f1f59d48fe3d8bf17d95
         newItem.isSelected = false;
         newItem.completed = false;
         newItem.editingTitle = false;
