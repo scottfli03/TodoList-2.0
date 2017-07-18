@@ -23,6 +23,7 @@
         <th class="listTH">Description</th>
         <th class="listTH">Remove</th>
       </tr>
+
       <tr class="list"
         ng-repeat="listItem in $ctrl.list.listItems"
         ng-hide="listItem.completed===true && $ctrl.listType==='incomplete' || listItem.completed===false && $ctrl.listType==='completed'">
@@ -33,9 +34,36 @@
             ng-model="listItem.isSelected"
             ng-click="$ctrl.updateListItem()($ctrl.list, listItem); $ctrl.toggleCompleted()($ctrl.listType, $ctrl.list);" />
         </td>
-        <td class="listTD"><label class="cellListData">{{listItem.title}}</label></td>
-        <td class="listTD"><label class="cellListData">{{listItem.description}}</label></td>
         <td class="listTD">
+          <a href ng-if="listItem.editingTitle !== true && listItem.title.length>0"
+             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem)"
+             class="cellListData">{{listItem.title}}</a>
+          <a href ng-if="listItem.editingTitle !== true && listItem.title.length===0"
+             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem)"
+             class="cellListData">_____________</a>
+          <input ng-if="listItem.editingTitle === true"
+                 type="text" id="item-title-edit"
+                 name="txtEditTitle"
+                 value="{{listItem.title}}"
+                 ng-model="listItem.title"
+                 ng-blur="$ctrl.toggleEdit()(1, $ctrl.list, listItem);" >
+        </td>
+        <td class="listTD">
+          <a href ng-if="listItem.editingDesc !== true && listItem.description.length>0"
+             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem)"
+             class="cellListData">{{listItem.description}}</a>
+          <a href ng-if="listItem.editingDesc !== true && listItem.description.length===0"
+             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem)"
+             class="cellListData">_____________</a>
+          <input ng-if="listItem.editingDesc === true"
+                 type="text" id="item-desc-edit"
+                 name="txtEditDesc"
+                 value="{{listItem.description}}"
+                 ng-model="listItem.description"
+                 ng-blur="$ctrl.toggleEdit()(2, $ctrl.list, listItem);" >
+        </td>
+
+        <td class="listTD" ng-switch="listItem.editingDesc">
           <a href ng-click="$ctrl.removeListItem()($ctrl.list, listItem)">remove</a>
         </td>
       </tr>

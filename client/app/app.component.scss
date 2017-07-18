@@ -16,12 +16,21 @@ header {
   font-weight: bold;
   border-bottom: solid #333 medium;
 }
+//
+// .modal-body {
+// }
 
-.modal-dialog {
-   position:fixed;
-   top:auto;
-   right:auto;
-   left:auto;
-   bottom:0;
-   margin-bottom: 0;
+.bootbox-body {
+  text-align: center;
+  font-size: 2em;
+}
+.modal-footer {
+  text-align: center;
+}
+.btn.btn-primary {
+  font-size: 1.5em;
+}
+.btn.btn-default {
+  font-size: 1.5em;
+  margin-right: 10px;
 }

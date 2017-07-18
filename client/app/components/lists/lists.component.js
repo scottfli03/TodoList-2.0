@@ -1,5 +1,5 @@
 import template from './lists.component.html';
-import thisController from './lists.controller.js';
+import controller from './lists.controller.js';
 import ngStorage from 'ngstorage';
 import './lists.component.scss';
 
@@ -9,6 +9,6 @@ let listsComponent = {
     listType: '<'
   },
   template,
-  controller: ['$scope', '$http', '$localStorage', '$state', 'customConfirmModalService', thisController]
+  controller: ['$scope', '$http', '$localStorage', '$state', '$ngBootbox', controller]
 };
 export default listsComponent;
