@@ -1,6 +1,13 @@
 class newListFormController {
     constructor() {
-      this.name = 'newListForm';
+      var vm = this;
+      vm.name = 'newListForm';
+      vm.addNewList = addNewList;
+
+      function addNewList(name) {
+        vm.addList({'listTitle': name})
+      }
+
     }
   }
 

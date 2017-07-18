@@ -59,8 +59,9 @@ class listsController {
             console.log("Ignore delete request.");
           })
       };
-
-      self.addListItem = function(list, newItem) {
+      
+      self.addListItem = function(list) {
+        var newItem = list.newItem;
         newItem.isSelected = false;
         newItem.completed = false;
         newItem.editingTitle = false;

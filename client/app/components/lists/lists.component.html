@@ -2,7 +2,7 @@
 <list-tables
   lists="$ctrl.lists"
   incomplete-filter="$ctrl.incompleteFilter"
-  add-list-item="$ctrl.addListItem"
+  add-list-item="$ctrl.addListItem(list)"
   remove-list="$ctrl.removeList"
   remove-list-item="$ctrl.removeListItem"
   update-list-item="$ctrl.updateListItem"
@@ -16,7 +16,7 @@
   <div id="newListForm">
     <new-list-form
       list-title="$ctrl.listTitle"
-      add-list="$ctrl.addList">
+      add-list="$ctrl.addList(listTitle)">
     </new-list-form>
   </div>
 </div>
