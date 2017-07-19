@@ -9,6 +9,6 @@ let listsComponent = {
     listType: '<'
   },
   template,
-  controller: ['$scope', '$http', '$localStorage', '$state', '$ngBootbox', controller]
+  controller: ['$scope', '$http', '$localStorage', '$state', '$ngBootbox', '$timeout', '$window', controller]
 };
 export default listsComponent;

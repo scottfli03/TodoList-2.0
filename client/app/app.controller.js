@@ -1,6 +1,5 @@
 class appController {
     constructor() {
-      console.log("Entered the App Controller");
       this.name = 'app';
       var self = this;
       self.nav = [{title: "Incomplete",

@@ -12,6 +12,7 @@ let listTablesComponent = {
     removeList: '&',
     removeListItem: '&',
     updateListItem: '&',
+    setFocus: '&',
     toggleCompleted: '&',
     toggleEdit: '&',
     toggleVisible: '&',

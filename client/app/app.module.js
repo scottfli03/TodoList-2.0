@@ -6,23 +6,18 @@ import 'normalize.css';
 import angular from 'angular';
 import ngStorage from 'ngstorage';
 import * as uiRouter from 'angular-ui-router';
-import ServicesModule from './services/services';
 import * as ngBootbox from 'ngbootbox';
 import appComponent from './app.component';
 import ComponentsModule from './components/components';
 
 angular.module('app', [
   ComponentsModule.name,
-  ServicesModule.name,
   'ui.router',
   'ngBootbox'
 ])
 .factory('ngStorage', function(){
   return ngStorage;
 })
-// .factory('ngBootbox', function(){
-//   return ngBootbox;
-// })
 .component('app', appComponent)
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   var homeState = {

@@ -36,27 +36,27 @@
         </td>
         <td class="listTD">
           <a href ng-if="listItem.editingTitle !== true && listItem.title.length>0"
-             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem)"
+             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem); $ctrl.setFocus()('item-title-edit'+$index);"
              class="cellListData">{{listItem.title}}</a>
           <a href ng-if="listItem.editingTitle !== true && listItem.title.length===0"
-             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem)"
+             ng-click="$ctrl.toggleEdit()(1, $ctrl.list, listItem); $ctrl.setFocus()('item-title-edit'+$index);"
              class="cellListData">_____________</a>
           <input ng-if="listItem.editingTitle === true"
-                 type="text" id="item-title-edit"
+                 type="text" id="item-title-edit{{$index}}"
                  name="txtEditTitle"
                  value="{{listItem.title}}"
                  ng-model="listItem.title"
                  ng-blur="$ctrl.toggleEdit()(1, $ctrl.list, listItem);" >
         </td>
         <td class="listTD">
-          <a href ng-if="listItem.editingDesc !== true && listItem.description.length>0"
-             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem)"
+          <a href id="desc-edit{{$index}}" ng-if="listItem.editingDesc !== true && listItem.description.length>0"
+             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem); $ctrl.setFocus()('item-desc-edit'+$index);"
              class="cellListData">{{listItem.description}}</a>
           <a href ng-if="listItem.editingDesc !== true && listItem.description.length===0"
-             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem)"
+             ng-click="$ctrl.toggleEdit()(2, $ctrl.list, listItem); $ctrl.setFocus()('item-desc-edit'+$index);"
              class="cellListData">_____________</a>
           <input ng-if="listItem.editingDesc === true"
-                 type="text" id="item-desc-edit"
+                 type="text" id="item-desc-edit{{$index}}"
                  name="txtEditDesc"
                  value="{{listItem.description}}"
                  ng-model="listItem.description"

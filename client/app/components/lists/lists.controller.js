@@ -1,5 +1,11 @@
 class listsController {
-    constructor($scope, $http, $localStorage, $state, $ngBootbox) {
+    constructor($scope,
+                $http,
+                $localStorage,
+                $state,
+                $ngBootbox,
+                $timeout,
+                $window) {
       this.name = 'lists';
       var self = this;
       self.listTitle = "";
@@ -9,7 +15,6 @@ class listsController {
       self.getLists = function() {
         if (typeof $localStorage.lists === "undefined") {
           $http.get('assets/json/lists.json').then(function(res){
-            console.log("Attempting to access data.");
             self.lists = res.data;
             self.saveListData();
           });
@@ -56,7 +61,6 @@ class listsController {
             var index = self.lists.indexOf(list);
             self.lists.splice(index, 1);
           }, function() {
-            console.log("Ignore delete request.");
           })
       };
 
@@ -68,14 +72,12 @@ class listsController {
         newItem.editingDesc = false;
         list.isNew = false;
         var newItemCopy = angular.copy(newItem);
-        console.log(newItemCopy);
         list.listItems.push(newItemCopy);
         list.newItem.title = undefined;
         list.newItem.description = undefined;
       };
 
       self.toggleEdit = function(num, list, listItem) {
-        console.log("Called toggleEdit");
         if (!listItem.editingTitle && num === 1) {
           listItem.editingTitle = true;
         } else if (!listItem.editingDesc && num === 2){
@@ -87,19 +89,23 @@ class listsController {
         self.updateListItem(list, listItem);
       };
 
+      self.setFocus = function(id) {
+        console.log(id);
+        return $timeout(function() {
+          var element = $window.document.getElementById(id);
+          if (element) {
+            element.focus();
+          }
+        });
+      }
+
       self.updateListItem = function(list, listItem) {
-        console.log("new");
-        console.log(listItem);
         var listIndex = self.lists.indexOf(list);
         var itemIndex = list.listItems.indexOf(listItem);
-        console.log("old");
-        console.log(self.lists[listIndex].listItems[itemIndex]);
         if (listItem.title === "") {
-          console.log("title");
           listItem.title = self.lists[listIndex].listItems[itemIndex].title;
         }
         if (listItem.description === "") {
-          console.log("desc");
           listItem.description = self.lists[listIndex].listItems[itemIndex].description;
         }
         var listItemCopy = angular.copy(listItem);
