@@ -6,7 +6,8 @@ let newListFormComponent = {
   restrict: 'E',
   bindings: {
     listTitle: '<',
-    addList: '&'
+    addList: '&',
+    setFocus: '&'
   },
   template,
   controller

@@ -12,6 +12,7 @@ let listsFormComponent = {
     removeList: '&',
     removeListItem: '&',
     updateListItem: '&',
+    copyListItem: '&',
     setFocus: '&',
     toggleCompleted: '&',
     toggleEdit: '&',

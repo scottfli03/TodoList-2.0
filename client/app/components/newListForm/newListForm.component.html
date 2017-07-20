@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <form name="newListForm"
       class="list-form"
-      ng-submit="$ctrl.addNewList($ctrl.listTitle)"
+      ng-submit="$ctrl.addNewList($ctrl.listTitle);
+      $ctrl.setFocus()($ctrl.listTitle + '-txt-add-title');
+      newListForm.$setPristine();"
       novalidate>
       <!-- ng-submit="newListForm.$valid
                 && $ctrl.addNewList($ctrl.listTitle)
@@ -15,5 +17,5 @@
     <input type="submit"
            value="Submit" />
 </form>
-<!---  TODO: Make lists component aware of title.
-Jeff said it should be passed down along with addList function. -->
+
+<!-- $ctrl.setFocus(listTitle+'-item-title-edit0'); -->

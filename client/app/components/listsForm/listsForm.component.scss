@@ -43,7 +43,11 @@ td {
   border-collapse: collapse;
   &.listTD {
     text-align: left;
+    a.a-remove:hover {
+      color: red;
+    }
   }
+
   &.title {
     min-width: 100px;
   }
@@ -94,17 +98,17 @@ input[type=text] {
 	border-color: #f3f7dd;
 	background-color: #f3f7dd;
   width: auto;
-
-  &#title.ng-dirty.ng-invalid {
-    outline-color: red;
+  &#desc.ng-dirty.ng-valid {
+    outline-color: green;
   }
   &#desc.ng-dirty.ng-invalid {
     outline-color: red;
   }
-  &#title.ng-dirty.ng-valid {
-    outline-color: green;
-  }
-  &#desc.ng-dirty.ng-valid {
-    outline-color: green;
-  }
+}
+
+input[id*='-edit-title'].ng-dirty.ng-invalid {
+  outline-color: red;
+}
+input[id*='-edit-title'].ng-dirty.ng-valid {
+  outline-color: green;
 }

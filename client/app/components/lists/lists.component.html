@@ -7,6 +7,7 @@
   remove-list-item="$ctrl.removeListItem"
   update-list-item="$ctrl.updateListItem"
   toggle-completed="$ctrl.toggleCompleted"
+  copy-list-item="$ctrl.copyListItem"
   toggle-edit="$ctrl.toggleEdit"
   toggle-visible="$ctrl.toggleVisible"
   set-focus="$ctrl.setFocus"
@@ -16,6 +17,7 @@
   <div id="formSeperator"></div>
   <div id="newListForm">
     <new-list-form
+      set-focus="$ctrl.setFocus"
       list-title="$ctrl.listTitle"
       add-list="$ctrl.addList(listTitle)">
     </new-list-form>
