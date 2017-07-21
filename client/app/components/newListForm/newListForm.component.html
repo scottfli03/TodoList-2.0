@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <form name="newListForm"
       class="list-form"
-      ng-submit="$ctrl.addNewList($ctrl.listTitle);
-      $ctrl.setFocus()($ctrl.listTitle + '-txt-add-title');
+      ng-submit="$ctrl.addList({listTitle:$ctrl.listTitle});
+      $ctrl.setFocus({id:$ctrl.listTitle + '-txt-add-title'});
       newListForm.$setPristine();"
       novalidate>
-      <!-- ng-submit="newListForm.$valid
-                && $ctrl.addNewList($ctrl.listTitle)
-                && newListForm.$setPristine()" -->
     <label>New List Title: </label>
     <input type="text"
            name="listTitle"
@@ -18,4 +15,4 @@
            value="Submit" />
 </form>
 
-<!-- $ctrl.setFocus(listTitle+'-item-title-edit0'); -->
+<!-- $ctrl.setFocus($ctrl.listTitle + '-txt-add-title'); -->

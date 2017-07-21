@@ -7,6 +7,7 @@ let listTablesComponent = {
   bindings: {
     lists: '<',
     newItem: '<',
+    listType: '<',
     incompleteFilter: '&',
     addListItem: '&',
     removeList: '&',
@@ -16,8 +17,7 @@ let listTablesComponent = {
     copyListItem: '&',
     toggleCompleted: '&',
     toggleEdit: '&',
-    toggleVisible: '&',
-    listType: '<'
+    toggleVisible: '&'
   },
   template,
   controller: thisController

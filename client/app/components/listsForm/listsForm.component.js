@@ -7,6 +7,7 @@ let listsFormComponent = {
   bindings: {
     list: '<',
     newItem: '<',
+    listType: '<',
     incompleteFilter: '&',
     addListItem: '&',
     removeList: '&',
@@ -16,8 +17,7 @@ let listsFormComponent = {
     setFocus: '&',
     toggleCompleted: '&',
     toggleEdit: '&',
-    toggleVisible: '&',
-    listType: '<'
+    toggleVisible: '&'
   },
   template,
   controller

@@ -2,12 +2,12 @@ class newListFormController {
     constructor() {
       var vm = this;
       vm.name = 'newListForm';
-      vm.addNewList = addNewList;
-
-      function addNewList(name) {
-        vm.addList({'listTitle': name})
-      }
-
+      // vm.addList = function(listTitle) {
+      //   vm.listsCtrl.addList(listTitle);
+      // }
+      // vm.setFocus = function(id) {
+      //   vm.listsCtrl.setFocus(id);
+      // }
     }
   }
 

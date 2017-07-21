@@ -25,8 +25,7 @@ angular.module('app', [
     url: '',
     component: 'lists',
     data: {
-      listType: 'incomplete',
-      active: 'incomplete'
+      listType: 'incomplete'
     }
   }
   var incompleteState = {
