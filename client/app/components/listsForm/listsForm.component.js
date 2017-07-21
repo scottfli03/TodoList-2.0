@@ -1,11 +1,11 @@
-import template from './listTables.component.html';
-import thisController from './listTables.controller.js';
-import './listTables.component.scss';
+import template from './listsForm.component.html';
+import controller from './listsForm.controller.js';
+import './listsForm.component.scss';
 
-let listTablesComponent = {
+let listsFormComponent = {
   restrict: 'E',
   bindings: {
-    lists: '<',
+    list: '<',
     newItem: '<',
     listType: '<',
     incompleteFilter: '&',
@@ -13,13 +13,13 @@ let listTablesComponent = {
     removeList: '&',
     removeListItem: '&',
     updateListItem: '&',
-    setFocus: '&',
     copyListItem: '&',
+    setFocus: '&',
     toggleCompleted: '&',
     toggleEdit: '&',
     toggleVisible: '&'
   },
   template,
-  controller: thisController
+  controller
 };
-export default listTablesComponent;
+export default listsFormComponent;

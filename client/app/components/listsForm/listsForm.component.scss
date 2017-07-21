@@ -1,10 +1,29 @@
+#listsForm {
+  margin-bottom: 1em;
+}
+
+.error-notification {
+  color: red;
+}
+
 ul {
   list-style-type:  none;
   li {
-    #list_title {
       margin-top: 10px;
-      font-weight: bold;
       font-family: 'arial';
+    .display-inline {
+      display: inline;
+      #toggle-visible {
+        a {
+          float:left;
+          margin-right: .5em;
+          text-decoration: none;
+          font-weight: lighter;
+        }
+        a:hover {
+          color: blue;
+        }
+      }
     }
   }
 }
@@ -24,9 +43,16 @@ td {
   border-collapse: collapse;
   &.listTD {
     text-align: left;
+    a.a-remove:hover {
+      color: red;
+    }
   }
 
-  /* Checkbox Column */ 
+  &.title {
+    min-width: 100px;
+  }
+
+  /* Checkbox Column */
   &.checkCol {
     padding-left: 10px;
     padding-right: 10px;
@@ -63,10 +89,26 @@ th {
   &.formTH {
     text-align: left;
   }
+  &#list_title {
+    text-align: center;
+  }
 }
 
-#listsForm {
-  margin-bottom: 1em;
+input[type=text] {
+	border-color: #f3f7dd;
+	background-color: #f3f7dd;
+  width: auto;
+  &#desc.ng-dirty.ng-valid {
+    outline-color: green;
+  }
+  &#desc.ng-dirty.ng-invalid {
+    outline-color: red;
+  }
 }
 
-
+input[id*='-edit-title'].ng-dirty.ng-invalid {
+  outline-color: red;
+}
+input[id*='-edit-title'].ng-dirty.ng-valid {
+  outline-color: green;
+}

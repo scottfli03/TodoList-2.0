@@ -1,13 +1,15 @@
 import template from './newListForm.component.html';
-import thisController from './newListForm.controller.js';
+import controller from './newListForm.controller.js';
 import './newListForm.component.scss';
 
 let newListFormComponent = {
   restrict: 'E',
   bindings: {
-    addList: '&'
+    listTitle: '<',
+    addList: '&',
+    setFocus: '&'
   },
   template,
-  thisController
+  controller
 };
 export default newListFormComponent;

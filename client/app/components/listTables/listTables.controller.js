@@ -1,6 +1,10 @@
 class listTablesController {
     constructor() {
-      this.name = 'listTables';
+      var self = this;
+      self.name = 'listTables';
+      // function addThisListItem(list) {
+      //   self.addListItem({'list': list});
+      // }
     }
   }
 

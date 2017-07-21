@@ -1,18 +1,25 @@
-<list-tables 
-  lists="$ctrl.lists" 
+<!DOCTYPE html>
+<list-tables
+  lists="$ctrl.lists"
+  list-type="$ctrl.listType"
   incomplete-filter="$ctrl.incompleteFilter"
-  add-list-item="$ctrl.addListItem" 
-  remove-list="$ctrl.removeList" 
-  remove-list-item="$ctrl.removeListItem" 
-  update-list-item="$ctrl.updateListItem" 
-  toggle-completed="$ctrl.toggleCompleted"
-  list-type="$ctrl.listType">
+  add-list-item="$ctrl.addListItem(list)"
+  remove-list="$ctrl.removeList(list)"
+  remove-list-item="$ctrl.removeListItem(list, listItem)"
+  update-list-item="$ctrl.updateListItem(list, listItem)"
+  toggle-completed="$ctrl.toggleCompleted(listType, list)"
+  copy-list-item="$ctrl.copyListItem(listItem)"
+  toggle-edit="$ctrl.toggleEdit(num, list, listItem)"
+  toggle-visible="$ctrl.toggleVisible(list)"
+  set-focus="$ctrl.setFocus(id)">
 </list-tables>
 <div ng-hide="$ctrl.listType==='completed'">
   <div id="formSeperator"></div>
   <div id="newListForm">
-    <new-list-form 
-      add-list="$ctrl.addList">
+    <new-list-form
+      set-focus="$ctrl.setFocus(id)"
+      list-title="$ctrl.listTitle"
+      add-list="$ctrl.addList(listTitle)">
     </new-list-form>
   </div>
 </div>

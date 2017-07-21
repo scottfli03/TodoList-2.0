@@ -1,14 +1,14 @@
 import template from './lists.component.html';
-import thisController from './lists.controller.js';
+import controller from './lists.controller.js';
 import ngStorage from 'ngstorage';
 import './lists.component.scss';
 
 let listsComponent = {
   restrict: 'E',
   bindings: {
-    listType: '@'
+    listType: '<'
   },
   template,
-  controller: ['$scope', '$http', '$localStorage', thisController]
+  controller: ['$scope', '$http', '$localStorage', '$state', '$ngBootbox', '$timeout', '$window', controller]
 };
 export default listsComponent;
