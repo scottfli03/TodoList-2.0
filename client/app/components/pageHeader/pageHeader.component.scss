@@ -2,15 +2,15 @@ li {
     display: inline-block;
     background-color: inherit;
     font-size: 1.2em;
-    padding: 0 .3em .1em .3em;
     margin: 0 0px 0 0px;
-    vertical-align: middle;
+    vertical-align: bottom;
     color: #333;
 }
 
 a {
   text-decoration: none !important;
   color: black;
+  padding: .2em .3em .1em .3em;
   &.ng-binding.active {
     font-size: 2em;
     color: #333;

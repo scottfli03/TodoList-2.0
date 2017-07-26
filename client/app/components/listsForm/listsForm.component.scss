@@ -11,18 +11,10 @@ ul {
   li {
       margin-top: 10px;
       font-family: 'arial';
+      vertical-align: bottom;
     .display-inline {
-      display: inline;
-      #toggle-visible {
-        a {
-          float:left;
-          margin-right: .5em;
-          text-decoration: none;
-          font-weight: lighter;
-        }
-        a:hover {
-          color: blue;
-        }
+      a {
+        float: left;
       }
     }
   }
@@ -35,6 +27,7 @@ table.listTable, tr.listTR, th.listTH, td.listTD {
   margin: 5px 3px 5px 3px;
   width: auto;
   background-color: #f3f7dd;
+  clear: both;
 }
 
 td {
@@ -42,6 +35,9 @@ td {
   border-style: solid;
   border-collapse: collapse;
   &.listTD {
+    &.remove {
+      text-align: center;
+    }
     text-align: left;
     a.a-remove:hover {
       color: red;
@@ -77,7 +73,7 @@ td {
   }
 }
 
-td.listTD, th.listTH {
+td.listTD {
   padding: 10px 5px 10px 5px;
 }
 
@@ -85,12 +81,18 @@ th {
   &.listTH {
     text-align: center;
     vertical-align: center;
+    padding: .3em 1em .3em 1em;
   }
   &.formTH {
     text-align: left;
   }
   &#list_title {
     text-align: center;
+    padding-top: .2em;
+    padding-bottom: .2em;
+  }
+  &.no-items {
+    padding: .3em .2em .3em .2em;
   }
 }
 
