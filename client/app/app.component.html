@@ -1,6 +1,22 @@
 <!DOCTYPE html>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-<header>TODO: List</header>
-<page-header page="page" ng-repeat="page in $ctrl.nav"></page-header>
-<ui-view></ui-view>
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">TODO: List</a>
+    </div>
+    <div class="navbar-collapse collapse" id="top-navbar">
+        <ul class="nav navbar-nav">
+            <page-header page="page" ng-repeat="page in $ctrl.nav"></page-header>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid main-form-container">
+    <div id="main-form-container">
+        <ui-view></ui-view>
+    </div>
+</div>

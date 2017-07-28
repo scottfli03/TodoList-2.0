@@ -1,18 +1,33 @@
-li {
-    display: inline-block;
-    background-color: inherit;
-    font-size: 1.2em;
-    margin: 0 0px 0 0px;
-    vertical-align: bottom;
-    color: #333;
+li.pull-left {
+  margin: 0 0 0 0;
+  display: inline-block;
+  vertical-align: bottom;
+  padding-left: .5em;
+  padding-right: .5em;
+  color: azure;
+  &.active.h5 {
+    font-size: 1.5em;
+  }
 }
 
-a {
-  text-decoration: none !important;
-  color: black;
-  padding: .2em .3em .1em .3em;
-  &.ng-binding.active {
-    font-size: 2em;
-    color: #333;
-  }
+#top-navbar {
+  border-color: #303030;
+}
+//
+//a {
+//  text-decoration: none !important;
+//  color: black;
+//  padding: .2em .3em .1em .3em;
+//  &.ng-binding.active {
+//    font-size: 2em;
+//    color: #333;
+//  }
+//}
+
+.navbar-header {
+  border-color: #303030;
+}
+
+.navbar-brand {
+  border-color: #303030;
 }

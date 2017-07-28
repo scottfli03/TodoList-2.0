@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<!-- <nav>
-  <p>{{$ctrl.page.title}}</p>
-  <li><a ui-sref="{{$ctrl.page.urlExt}}" ui-sref-active="active">{{$ctrl.page.title}}</a></li
-  ><li><a  ui-sref="completed"
-            ui-sref-active="active"
-            >Completed</a></li
-  >|<li><a ui-sref="about" ui-sref-active="active">About</a></li>
-</nav> -->
-<li><a ui-sref="{{$ctrl.page.urlExt}}" ui-sref-active="active">{{$ctrl.page.title}}</a></li
->
+
+<!-------   Leave the carriage return after the closing li --------->
+
+<div class="navbar-nav">
+    <li ui-sref-active="active" class="pull-left">
+        <h5 href class="text-uppercase" ui-sref="{{$ctrl.page.urlExt}}">{{$ctrl.page.title}}</h5></li>
+</div>

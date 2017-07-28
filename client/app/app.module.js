@@ -5,6 +5,7 @@ import 'bootstrap-css-only';
 import 'normalize.css';
 import angular from 'angular';
 import ngStorage from 'ngstorage';
+import * as uiBootstrap from 'angular-ui-bootstrap';
 import * as uiRouter from 'angular-ui-router';
 import * as ngBootbox from 'ngbootbox';
 import appComponent from './app.component';
@@ -17,6 +18,9 @@ angular.module('app', [
 ])
 .factory('ngStorage', function(){
   return ngStorage;
+})
+.factory('uiBootstrap', function(){
+  return uiBootstrap;
 })
 .component('app', appComponent)
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

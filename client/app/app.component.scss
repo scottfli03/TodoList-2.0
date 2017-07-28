@@ -1,22 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web:700');
 
-body {
-  margin-left: 3%;
-  margin-right: 3%;
-  background-color: #c3c7ae;
-}
+/* For mobile phones: */
+//[class*="col-"] {
+//  width: 100%;
+//}
+//@media only screen and (min-width: 600px) {
+//  /* For tablets: */
+//  .col-m-1 {width: 8.33%;}
+//  .col-m-2 {width: 16.66%;}
+//  .col-m-3 {width: 25%;}
+//  .col-m-4 {width: 33.33%;}
+//  .col-m-5 {width: 41.66%;}
+//  .col-m-6 {width: 50%;}
+//  .col-m-7 {width: 58.33%;}
+//  .col-m-8 {width: 66.66%;}
+//  .col-m-9 {width: 75%;}
+//  .col-m-10 {width: 83.33%;}
+//  .col-m-11 {width: 91.66%;}
+//  .col-m-12 {width: 100%;}
+//}
+//@media only screen and (min-width: 768px) {
+//  /* For desktop: */
+//  .col-1 {width: 8.33%;}
+//  .col-2 {width: 16.66%;}
+//  .col-3 {width: 25%;}
+//  .col-4 {width: 33.33%;}
+//  .col-5 {width: 41.66%;}
+//  .col-6 {width: 50%;}
+//  .col-7 {width: 58.33%;}
+//  .col-8 {width: 66.66%;}
+//  .col-9 {width: 75%;}
+//  .col-10 {width: 83.33%;}
+//  .col-11 {width: 91.66%;}
+//  .col-12 {width: 100%;}
+//}
 
-header {
-  background-color: inherit;
-  padding: .3em 0 .1em .3em;
-  margin: 0 0 0 0;
-  font-size: 4em;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;
-  border-bottom: solid #333 medium;
+* {
+  box-sizing: border-box;
 }
-
 
 .bootbox-body {
   text-align: center;
@@ -32,3 +54,32 @@ header {
   font-size: 1.5em;
   margin-right: 10px;
 }
+
+body {
+  background-color: ghostwhite;
+}
+
+ul.nav {
+  margin-left: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #303030;
+}
+
+#top-navbar {
+  background-color: #303030;
+}
+
+.navbar-header {
+  background-color: #303030;
+}
+
+a.navbar-brand {
+  font-size: 2em;
+  color: #888;
+}
+
+.navbar-default {
+  color: #666;
+}
+

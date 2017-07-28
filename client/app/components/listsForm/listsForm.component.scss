@@ -1,116 +1,177 @@
-#listsForm {
-  margin-bottom: 1em;
-}
-
-.error-notification {
-  color: red;
-}
-
-ul {
-  list-style-type:  none;
-  li {
-      margin-top: 10px;
-      font-family: 'arial';
-      vertical-align: bottom;
-    .display-inline {
-      a {
-        float: left;
-      }
-    }
-  }
-}
-
-table.listTable, tr.listTR, th.listTH, td.listTD {
-  border-style: solid;
-  border-width: 1px;
-  border-collapse: collapse;
-  margin: 5px 3px 5px 3px;
-  width: auto;
-  background-color: #f3f7dd;
-  clear: both;
-}
-
-td {
-  border-width: 1px;
-  border-style: solid;
-  border-collapse: collapse;
-  &.listTD {
-    &.remove {
-      text-align: center;
-    }
-    text-align: left;
-    a.a-remove:hover {
-      color: red;
-    }
-  }
-
-  &.title {
-    min-width: 100px;
-  }
-
-  /* Checkbox Column */
-  &.checkCol {
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-    vertical-align: center;
-  }
-
-  &.corner-symbol {
-    font-size: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
-    vertical-align: center;
-    border-top-width: 2px;
-  }
-
-  /* New Item row */
-  &.newItemTD {
-    padding:5px 5px 5px 5px;
-    background-color: #f3f7dd;
-    border-top-width: 2px;
-  }
-}
-
-td.listTD {
-  padding: 10px 5px 10px 5px;
-}
-
-th {
-  &.listTH {
-    text-align: center;
-    vertical-align: center;
-    padding: .3em 1em .3em 1em;
-  }
-  &.formTH {
-    text-align: left;
-  }
-  &#list_title {
-    text-align: center;
-    padding-top: .2em;
-    padding-bottom: .2em;
-  }
-  &.no-items {
-    padding: .3em .2em .3em .2em;
-  }
-}
+//#listsForm {
+//  margin-bottom: 1em;
+//}
+//
+//.error-notification {
+//  color: red;
+//}
+//
+//ul {
+//  list-style-type:  none;
+//  li {
+//      margin-top: 10px;
+//      font-family: 'arial';
+//      vertical-align: bottom;
+//    .display-inline {
+//      a {
+//        float: left;
+//      }
+//    }
+//  }
+//}
+//
+//table.listTable, tr.listTR, th.listTH, td.listTD {
+//  border-style: solid;
+//  border-width: 1px;
+//  border-collapse: collapse;
+//  margin: 5px 3px 5px 3px;
+//  width: auto;
+//  background-color: #f3f7dd;
+//  clear: both;
+//}
+//
+//td {
+//  border-width: 1px;
+//  border-style: solid;
+//  border-collapse: collapse;
+//  &.listTD {
+//    &.remove {
+//      text-align: center;
+//    }
+//    text-align: left;
+//    a.a-remove:hover {
+//      color: red;
+//    }
+//  }
+//
+//  &.title {
+//    min-width: 100px;
+//  }
+//
+//  /* Checkbox Column */
+//  &.checkCol {
+//    padding-left: 10px;
+//    padding-right: 10px;
+//    text-align: center;
+//    vertical-align: center;
+//  }
+//
+//  &.corner-symbol {
+//    font-size: 20px;
+//    padding-left: 10px;
+//    padding-right: 10px;
+//    text-align: center;
+//    vertical-align: center;
+//    border-top-width: 2px;
+//  }
+//
+//  /* New Item row */
+//  &.newItemTD {
+//    padding:5px 5px 5px 5px;
+//    background-color: #f3f7dd;
+//    border-top-width: 2px;
+//  }
+//}
+//
+//td.listTD {
+//  padding: 10px 5px 10px 5px;
+//}
+//
+//th {
+//  &.listTH {
+//    text-align: center;
+//    vertical-align: center;
+//    padding: .3em 1em .3em 1em;
+//  }
+//  &.formTH {
+//    text-align: left;
+//  }
+//  &#list_title {
+//    text-align: center;
+//    padding-top: .2em;
+//    padding-bottom: .2em;
+//  }
+//  &.no-items {
+//    padding: .3em .2em .3em .2em;
+//  }
+//}
+//
+//input[type=text] {
+//	border-color: #f3f7dd;
+//	background-color: #f3f7dd;
+//  width: auto;
+//  &#desc.ng-dirty.ng-valid {
+//    outline-color: green;
+//  }
+//  &#desc.ng-dirty.ng-invalid {
+//    outline-color: red;
+//  }
+//}
+//
+//input[id*='-edit-title'].ng-dirty.ng-invalid {
+//  outline-color: red;
+//}
+//input[id*='-edit-title'].ng-dirty.ng-valid {
+//  outline-color: green;
+//}
 
 input[type=text] {
-	border-color: #f3f7dd;
-	background-color: #f3f7dd;
-  width: auto;
   &#desc.ng-dirty.ng-valid {
     outline-color: green;
   }
   &#desc.ng-dirty.ng-invalid {
     outline-color: red;
   }
+  &.title.ng-dirty.ng-valid {
+    outline-color: green;
+  }
+  &.title.ng-dirty.ng-invalid {
+    outline-color: red;
+  }
 }
 
-input[id*='-edit-title'].ng-dirty.ng-invalid {
-  outline-color: red;
+.inline-group {
+  display: inline;
 }
-input[id*='-edit-title'].ng-dirty.ng-valid {
-  outline-color: green;
+
+p {
+  margin-bottom: 0;
+  margin-top: 2px;
 }
+
+.row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.btn-controls {
+  margin-left: 15px;
+}
+
+.btn.default.dark {
+  margin-right: 0;
+}
+
+.btn-primary.dark {
+  background-color: #303030;
+  border: white;
+}
+
+.btn-success.dark {
+  background-color: #303030;
+}
+
+.btn-danger.dark {
+  background-color: #303030;
+}
+
+.pad-right {
+  padding-right: 15px;
+}
+
+.row.pad-top {
+  padding-top: 5px;
+  border-top: solid 1px #888888;
+  border-bottom: solid 1px #888888;
+}
+

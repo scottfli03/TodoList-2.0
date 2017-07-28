@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<form name="newListForm"
-      class="list-form"
-      ng-submit="$ctrl.addList({listTitle:$ctrl.listTitle});
-      $ctrl.setFocus({id:$ctrl.listTitle + '-txt-add-title'});
-      newListForm.$setPristine();"
-      novalidate>
-    <label>New List Title: </label>
-    <input type="text"
-           name="listTitle"
-           class="txtListTitle"
-           ng-model="$ctrl.listTitle"
-           required />
-    <input type="submit"
-           value="Submit" />
-</form>
-
+<div class="row">
+    <form name="newListForm"
+          ng-submit="$ctrl.addList({listTitle:$ctrl.listTitle});
+          $ctrl.setFocus({id:$ctrl.listTitle + '-txt-add-title'});
+          newListForm.$setPristine();"
+          class="form-group pad-r-l"
+          novalidate>
+        <div class="input-group col-xs-12">
+            <span class="input-group-addon">New List Title: </span>
+            <input type="text"
+                   name="listTitle"
+                   class="form-control"
+                   ng-model="$ctrl.listTitle"
+                   required />
+            <div class="input-group-btn">
+                <button type="submit"
+                        class="btn glyphicon glyphicon-plus"></button>
+            </div>
+        </div>
+    </form>
+</div>
 <!-- $ctrl.setFocus($ctrl.listTitle + '-txt-add-title'); -->

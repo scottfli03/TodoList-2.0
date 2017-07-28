@@ -1,130 +1,153 @@
 <!DOCTYPE html>
-<form name="listSetForm{{$index}}"
-  id="listsForm"
-  ng-submit="listSetForm.$valid
-    && $ctrl.addListItem($ctrl.list);
-    listSetForm.$setPristine();
-    $ctrl.setFocus({id:$ctrl.list.title + '-txt-add-title'});" novalidate>
+<div class="row pad-top">
+  <h4 ng-if="$ctrl.list.visible" class="col-sm-3 col-3 pull-left">{{$ctrl.list.title}}</h4>
+  <div class="btn-group-sm col-sm-6 col-6 pull-right text-right" ng-switch="$ctrl.list.visible">
+    <button ng-switch-when="true"
+            ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
+            class="btn btn-primary glyphicon glyphicon-collapse-up dark">
+    </button
+    ><button ng-switch-when="false"
+             ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
+             class="btn btn-primary dark">{{$ctrl.list.title}}
+    </button
+    ><button ng-switch-when="undefined"
+             ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
+             class="btn btn-primary glyphicon glyphicon-collapse-up dark">
+    </button
+    ><button ng-if="$ctrl.list.visible"
+             class="btn btn-default glyphicon glyphicon-trash dark"
+             ng-click="$ctrl.removeList({list:$ctrl.list})">
+    </button>
+  </div>
+</div>
+<div ng-if="$ctrl.list.visible === true">
+  <!-- If listType is Completed and the is at least one item -->
 
-  <li id="titleListItem">
-    <div class="display-inline">
-      <div id="toggle-visible" ng-switch="$ctrl.list.visible">
-        <a href ng-switch-when="true" ng-click="$ctrl.toggleVisible({list:$ctrl.list})">hide</a>
-        <a href ng-switch-when="false" ng-click="$ctrl.toggleVisible({list:$ctrl.list})">{{$ctrl.list.title}}</a>
-        <a href ng-switch-when="undefined" ng-click="$ctrl.toggleVisible({list:$ctrl.list})">hide</a>
-      </div>
-      <a href ng-if="$ctrl.list.visible"
-        ng-click="$ctrl.removeList({list:$ctrl.list})">delete</a>
+
+  <div class="row table-bordered hidden-xs">
+    <div ng-if="$ctrl.listType==='completed'
+           && ($ctrl.list.listItems|filter:{completed:true}).length>0">
+      <header class="col-xs-1 col-1 text-center">&nbsp</header>
+      <header class="col-xs-3 col-3 text-center">Title</header>
+      <header class="col-xs-7 col-7 text-center">Description</header>
+    </div>
+    <div ng-if="$ctrl.listType==='incomplete'">
+      <header class="col-xs-1 col-1 text-center">&nbsp</header>
+      <header class="col-xs-3 col-3 text-center">Title</header>
+      <header class="col-xs-7 col-7 text-center">Description</header>
+    </div>
+    <div class="col-sm-12"
+         ng-if="$ctrl.listType==='completed'
+         && ($ctrl.list.listItems|filter:{completed:true}).length===0">
+      No Completed Items for this List.
+      &nbspThere are {{($ctrl.list.listItems|filter:completed:true).length}}
+      items left to complete.
+    </div>
+  </div>
+
+    <!-- Display listItems if they match the listType -->
+
+  <div class="row table-bordered"
+       ng-repeat="listItem in $ctrl.list.listItems"
+       ng-hide="listItem.completed===true && $ctrl.listType==='incomplete'
+        || listItem.completed===false && $ctrl.listType==='completed'">
+
+    <!-- Remove ListItem/Toggle Completed -->
+
+    <!-- Title shown as either:
+        1)As Text if not editing.
+        2)Textbox if editing. (updates on blur) -->
+    <div class="btn-group-lg pull-left btn-controls hidden-xs">
+      <button class="btn-danger glyphicon glyphicon-remove text-center" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
+      ><button class="btn-success glyphicon glyphicon-ok"
+               ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+    </button>
+    </div>
+    <p href class="col-xs-6 col-sm-3 cell"
+            ng-if="listItem.editingTitle === false"
+            ng-click="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});
+            $ctrl.copyListItem({listItem:listItem});
+            $ctrl.setFocus({id:$ctrl.list.title + '-item-title-edit' + $index});">
+      <label class="visible-xs-inline">Title:&nbsp
+      </label>{{listItem.title}}
+    </p>
+    <div class="btn-group-lg pull-right btn-controls visible-xs-inline pad-right">
+      <button class="btn-danger glyphicon glyphicon-remove text-center dark" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
+      ><button class="btn-success glyphicon glyphicon-ok dark"
+               ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+    </button>
     </div>
 
-    <table ng-if="$ctrl.list.visible" class="listTable">
-      <tr>
-        <th colspan="4" id="list_title">{{$ctrl.list.title}}</th>
-      </tr>
-      <!-- If listType is Completed and the is at least one item -->
-      <tr class="listTR"
-        ng-if="$ctrl.listType==='completed'
-        && ($ctrl.list.listItems|filter:{completed:true}).length>0" >
-        <th class="listTH">&#10003;</th>
-        <th class="listTH">Title</th>
-        <th class="listTH">Description</th>
-        <th class="listTH">Remove</th>
-      </tr>
-      <tr class="listTR"
-        ng-if="$ctrl.listType==='completed'
-        && ($ctrl.list.listItems|filter:{completed:true}).length===0" >
-        <th colspan="4" class="no-items">
-          No Completed Items for this List.
-          &nbspThere are {{($ctrl.list.listItems|filter:completed:true).length}}
-          items left to complete.
-        </th>
-      </tr>
+    <input class="col-xs-12 col-sm-3 cell"
+           ng-if="listItem.editingTitle === true"
+           type="text" id="{{$ctrl.list.title}}-item-title-edit{{$index}}"
+           name="txtEditTitle"
+           value="{{listItem.title}}"
+           ng-model="listItem.title"
+           ng-blur="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});" />
+  <!-- Description shown as either:
+    1)Text if not editing.
+    2)Textbox if editing (updates on blur) -->
+    <p href class="col-xs-12 col-sm-7 col-7 desc"
+            id="desc-edit{{$index}}"
+            ng-if="listItem.editingDesc !== true && listItem.description.length>0"
+            ng-click="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});
+              $ctrl.setFocus({id:$ctrl.list.title + '-item-desc-edit' + $index});"
+            class="cellListData">
+      <label class="visible-xs-inline">Desc:&nbsp
+      </label>{{listItem.description}}
+    </p>
+    <input class="col-xs-12 col-sm-7 col-7 desc"
+           ng-if="listItem.editingDesc === true"
+           type="text" id="{{$ctrl.list.title}}-item-desc-edit{{$index}}"
+           name="txtEditDesc"
+           value="{{listItem.description}}"
+           ng-model="listItem.description"
+           ng-blur="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});" />
+  </div>
+    <!-- Row for new List Items. Row hidden when completed list -->
+  <div ng-hide="$ctrl.listType==='completed'" class="row">
+    <form name="listSetForm{{$index}}"
+          id="listsForm"
+          ng-submit="listSetForm.$valid
+            && $ctrl.addListItem($ctrl.list);
+          listSetForm.$setPristine();
+          $ctrl.setFocus({id:$ctrl.list.title + '-txt-add-title'});"
+          class="form-group form-inline col-sm-12 col-12" novalidate>
+      <div
+       class="input-group input-group-sm col-sm-5 col-12">
+        <label for="{{$ctrl.list.title}}-txt-add-title" class="input-group-addon">Title:</label>
+        <input class="title form-control"
+               type="text"
+               id="{{$ctrl.list.title}}-txt-add-title"
+               name="txtTitle"
+               ng-model="$ctrl.list.newItem.title"
+               required>
+      </div
+      ><div class="input-group input-group-sm col-sm-7 col-12">
+        <span for="desc" class="input-group-addon">Desc:</span>
+        <input type="text"
+               class="form-control"
+               id="desc" name="txtDesc"
+               ng-model="$ctrl.list.newItem.description"
+               required>
+        <div class="input-group-btn">
+          <button class="btn btn-secondary glyphicon glyphicon-plus" id="submit-button" type="submit" ng-disabled="!listSetForm.$valid"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Message if listType is completed and there are no more items left -->
+  <p ng-if="$ctrl.listType==='incomplete'
+    && ($ctrl.list.listItems|filter:{completed:false}).length===0
+    && $ctrl.list.isNew===false">No items left to complete. Please add more items.</p>
 
-      <!-- Display listItems if they match the listType -->
-      <tr class="list"
-          ng-repeat="listItem in $ctrl.list.listItems"
-          ng-hide="listItem.completed===true && $ctrl.listType==='incomplete'
-            || listItem.completed===false && $ctrl.listType==='completed'">
-        <td class="checkCol">
-          <input type="checkbox"
-                 id="chkIsSelected"
-                 ng-checked="{{listItem.isSelected}}"
-                 ng-model="listItem.isSelected"
-                 ng-click="$ctrl.updateListItem({list:$ctrl.list, listItem:listItem});
-                   $ctrl.toggleCompleted({listType:$ctrl.listType, list:$ctrl.list});" />
-        </td>
-
-        <!-- Title shown as either:
-          1)As Text if not editing.
-          2)Textbox if editing. (updates on blur) -->
-        <td class="listTD">
-          <a href ng-if="listItem.editingTitle === false"
-             ng-click="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});
-                $ctrl.copyListItem({listItem:listItem});
-                $ctrl.setFocus({id:$ctrl.list.title + '-item-title-edit' + $index});"
-             class="cellListData">{{listItem.title}}</a>
-          <input ng-if="listItem.editingTitle === true"
-                 type="text" id="{{$ctrl.list.title}}-item-title-edit{{$index}}"
-                 name="txtEditTitle"
-                 value="{{listItem.title}}"
-                 ng-model="listItem.title"
-                 ng-blur="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});" >
-        </td>
-
-        <!-- Description shown as either:
-          1)Text if not editing.
-          2)Textbox if editing (updates on blur) -->
-        <td class="listTD">
-          <a href id="desc-edit{{$index}}"
-                  ng-if="listItem.editingDesc !== true && listItem.description.length>0"
-                  ng-click="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});
-                    $ctrl.setFocus({id:$ctrl.list.title + '-item-desc-edit' + $index});"
-                  class="cellListData">{{listItem.description}}</a>
-          <input ng-if="listItem.editingDesc === true"
-                 type="text" id="{{$ctrl.list.title}}-item-desc-edit{{$index}}"
-                 name="txtEditDesc"
-                 value="{{listItem.description}}"
-                 ng-model="listItem.description"
-                 ng-blur="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});" >
-        </td>
-
-        <!-- Remove ListItem -->
-        <td class="listTD remove" ng-switch="listItem.editingDesc">
-          <a href class="a-remove" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem})">remove</a>
-        </td>
-      </tr>
-
-      <!-- row hidden when completed list -->
-      <tr ng-hide="$ctrl.listType==='completed'">
-          <td class="corner-symbol">+</td>
-          <td class="newItemTD">
-            <input type="text"
-              id="{{$ctrl.list.title}}-txt-add-title"
-              name="txtTitle"
-              ng-model="$ctrl.list.newItem.title" required>
-          </td>
-          <td class="newItemTD">
-            <input type="text"
-              id="desc" name="txtDesc"
-              ng-model="$ctrl.list.newItem.description" required>
-          </td>
-          <td class="newItemTD">
-            <input type="submit" class="newItemBtn" ng-disabled="!listSetForm.$valid"/>
-          </td>
-      </tr>
-    </table>
-    <!-- Message if listType is completed and there are no more items left -->
-    <p ng-if="$ctrl.listType==='incomplete'
-      && ($ctrl.list.listItems|filter:{completed:false}).length===0
-      && $ctrl.list.isNew===false">No items left to complete. Please add more items.</p>
-
-    <!-- Form validation text -->
-    <span class="error-notification"
-      ng-if="listSetForm.txtTitle.$invalid
-        && listSetForm.txtTitle.$dirty
-        || listSetForm.txtDesc.$invalid
-        && listSetForm.txtDesc.$dirty">
-      Please enter a valid title and description.
-    </span>
-  </li>
-</form>
+  <!-- Form validation text -->
+  <span class="error-notification"
+    ng-if="listSetForm.txtTitle.$invalid
+      && listSetForm.txtTitle.$dirty
+      || listSetForm.txtDesc.$invalid
+      && listSetForm.txtDesc.$dirty">
+    Please enter a valid title and description.
+  </span>
+</div>

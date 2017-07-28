@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<ul class="lists">
-  <lists-form
-    list="list"
-    new-item="$ctrl.newItem"
-    list-type="$ctrl.listType"
-    add-list-item="$ctrl.addListItem({list:list})"
-    remove-list="$ctrl.removeList({list:list})"
-    remove-list-item="$ctrl.removeListItem({list:list, listItem:listItem})"
-    update-list-item="$ctrl.updateListItem({list:list, listItem:listItem})"
-    toggle-completed="$ctrl.toggleCompleted({listType:listType, list:list})"
-    set-focus="$ctrl.setFocus({id:id})"
-    copy-list-item="$ctrl.copyListItem({listItem:listItem})"
-    toggle-edit="$ctrl.toggleEdit({num:num, list:list, listItem:listItem})"
-    toggle-visible="$ctrl.toggleVisible({list:list})"
-    ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
-  </lists-form>
-</ul>
+<lists-form list="list"
+            new-item="$ctrl.newItem"
+            list-type="$ctrl.listType"
+            add-list-item="$ctrl.addListItem({list:list})"
+            remove-list="$ctrl.removeList({list:list})"
+            remove-list-item="$ctrl.removeListItem({list:list, listItem:listItem})"
+            update-list-item="$ctrl.updateListItem({list:list, listItem:listItem})"
+            toggle-completed="$ctrl.toggleCompleted({listItem:listItem})"
+            set-focus="$ctrl.setFocus({id:id})"
+            copy-list-item="$ctrl.copyListItem({listItem:listItem})"
+            toggle-edit="$ctrl.toggleEdit({num:num, list:list, listItem:listItem})"
+            toggle-visible="$ctrl.toggleVisible({list:list})"
+            ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
+</lists-form>

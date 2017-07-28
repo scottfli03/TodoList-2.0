@@ -139,20 +139,13 @@ class listsController {
         self.lists[listIndex].listItems.splice(itemIndex, 1);
       };
 
-      self.toggleCompleted = function(listType, list) {
-        var liLength = list.listItems.length;
-        var index = self.lists.indexOf(list);
-        var liIsSelected;
-        for (var i = 0; i < liLength; i++) {
-          liIsSelected = list.listItems[i].isSelected;
-          if (liIsSelected === true && listType === 'incomplete') {
-            list.listItems[i].completed = true;
-          } else if (liIsSelected === true && listType === 'completed') {
-            list.listItems[i].completed = false;
-          }
+      self.toggleCompleted = function(listItem) {
+        console.log(listItem);
+        if (!listItem.completed) {
+          listItem.completed = true;
+        } else {
+          listItem.completed = false;
         }
-        setUnSelected();
-        self.lists[index] = angular.copy(list);
       };
 
       var setUnSelected = function() {
