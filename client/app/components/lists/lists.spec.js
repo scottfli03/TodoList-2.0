@@ -1,9 +1,12 @@
 describe('lists', function() {
 
   beforeEach(module('app'));
+  beforeEach(module('angular'));
   beforeEach(module('ngStorage'));
-
-  beforeEach(function() {
+  beforeEach(module('jquery'));
+  var ctrl;
+  var $scope;
+  beforeEach(inject(function($injector, $rootScope, $componentController, $localStorage, $http, $q) {
     store = {};
     lists = [  
       {"title":"Hygiene Products", 
@@ -33,31 +36,66 @@ describe('lists', function() {
         "isSelected": true, 
         "completed": true}]}
     ];
-  });
+      $scope = $rootScope;
+      deferred = $q.defer();
+
+      $localStorage.getItem = function(key){};
+      $localStorage.setItem = function(key, value) {};
+      $localStorage.clear = function() {};
+
+      spyOn($localStorage, 'getItem').and.callFake(function (key) {
+          return store[key];
+      });
+      spyOn($localStorage, 'setItem').and.callFake(function (key, value) {
+          return store[key] = value + '';
+      });
+      spyOn($localStorage, 'clear').and.callFake(function () {
+          store = {};
+      });
+      spyOn($http, 'get').and.returnValue(deferred.promise);
+
+      ctrl = $componentController('listsComponent', {$scope: $scope,
+          $http: $http,
+          $localStorage: $localStorage,
+          $state: $state,
+          $ngBootbox: $ngBootbox,
+          $timeout: $timeout,
+          $window: $window});
+      console.log(ctrl);
+      ctrl.lists = lists;
+  }));
 
   // --- Before each test in the Component --- //
-  beforeEach(inject(function($injector, $rootScope, $componentController, $localStorage, $http, $q) {
-    $scope = $rootScope.$new();
-    deferred = $q.defer();
-
-    $localStorage.getItem = function(key){};
-    $localStorage.setItem = function(key, value) {};
-    $localStorage.clear = function() {};
-
-    spyOn($localStorage, 'getItem').and.callFake(function (key) {
-      return store[key];
-    });
-    spyOn($localStorage, 'setItem').and.callFake(function (key, value) {
-      return store[key] = value + '';
-    });
-    spyOn($localStorage, 'clear').and.callFake(function () {
-      store = {};
-    });
-    spyOn($http, 'get').and.returnValue(deferred.promise);
-
-    ctrl = $componentController('listApp', {$scope, $http, $localStorage});
-    ctrl.lists = lists;
-  }));
+  // beforeEach(inject(function($injector, $rootScope, $componentController, $localStorage, $http, $q) {
+  //   console.log("TEST");
+  //   $scope = $rootScope.$new();
+  //   deferred = $q.defer();
+  //
+  //   $localStorage.getItem = function(key){};
+  //   $localStorage.setItem = function(key, value) {};
+  //   $localStorage.clear = function() {};
+  //
+  //   spyOn($localStorage, 'getItem').and.callFake(function (key) {
+  //     return store[key];
+  //   });
+  //   spyOn($localStorage, 'setItem').and.callFake(function (key, value) {
+  //     return store[key] = value + '';
+  //   });
+  //   spyOn($localStorage, 'clear').and.callFake(function () {
+  //     store = {};
+  //   });
+  //   spyOn($http, 'get').and.returnValue(deferred.promise);
+  //
+  //   this.ctrl = $componentController('listsComponent', {$scope: $scope,
+  //                                                      $http: $http,
+  //                                                      $localStorage: $localStorage,
+  //                                                      $state: $state,
+  //                                                      $ngBootbox: $ngBootbox,
+  //                                                      $timeout: $timeout,
+  //                                                      $window: $window});
+  //   ctrl.lists = lists;
+  //   console.log(this.ctrl);
+  // }));
 
   // Original listApp test
   describe('lists', function() {

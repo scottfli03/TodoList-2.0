@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Wed Jul 12 2017 10:34:54 GMT-0400 (EDT)
+// Generated on Mon Jul 31 2017 10:26:16 GMT-0400 (EDT)
 
 module.exports = function(config) {
   config.set({
@@ -10,13 +10,14 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'client/app/components/../*.js', watched: false},
-      {pattern: 'client/app/components/../*.spec.js', watched: false}
+      'node_modules/angular/angular.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'client/app/components/**/*spec.js'
     ],
 
 
@@ -28,8 +29,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'client/app/components/../*.js': ['webpack'],
-      'client/app/components/../*.spec.js': ['webpack']
     },
 
 
@@ -53,12 +52,12 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

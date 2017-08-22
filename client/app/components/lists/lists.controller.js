@@ -8,23 +8,45 @@ class listsController {
                 $window) {
       this.name = 'lists';
       var self = this;
-
       self.itemCopy = {};
       self.listTitle = "";
       self.modalResponse = undefined;
       self.listType = $state.current.data.listType;
 
-      // Gets the lists either from local storage or from the JSON file.
       self.getLists = function() {
-        if (typeof $localStorage.lists === "undefined") {
-          $http.get('assets/json/lists.json').then(function(res){
-            self.lists = res.data;
-            self.saveListData();
-          });
-        } else {
-          self.lists = localStorage.lists;
+        $http.get('http://www.todolist.com:8081/mvcapp/list/all').then(function(res){
+          self.lists = res.data;
+          console.log("Got Lists");
+          self.initializeLists();
+        });
+      }
+
+      var listItem = {};
+      var list = {};
+      self.initializeLists = function() {
+        for (var i = 0; i < self.lists.length; i++) {
+          console.log("outer loop");
+          self.lists[i].visible = true;
+          for (var a = 0; i < self.lists[i].listItems.length; a++) {
+            self.lists[i].listItems[a].completed = false;
+            self.lists[i].listItems[a].editingTitle = false;
+            self.lists[i].listItems[a].editingDesc = false;
+          }
         }
-      };
+        console.log(self.lists);
+      }
+
+      // Gets the lists either from local storage or from the JSON file.
+      // self.getLists = function() {
+      //   if (typeof $localStorage.lists === "undefined") {
+      //     $http.get('assets/json/lists.json').then(function(res){
+      //       self.lists = res.data;
+      //       self.saveListData();
+      //     });
+      //   } else {
+      //     self.lists = localStorage.lists;
+      //   }
+      // };
 
       // Sets if the list should be visible in the view.
       self.toggleVisible = function(list) {
@@ -44,15 +66,15 @@ class listsController {
         };
       };
 
-      // Sets lists from local storage as lists in controller.
-      self.loadListData = function() {
-        self.lists = $localStorage.lists;
-      };
-
-      // Saves list data from controller to local storage.
-      self.saveListData = function() {
-        $localStorage.lists = self.lists;
-      };
+      // // Sets lists from local storage as lists in controller.
+      // self.loadListData = function() {
+      //   self.lists = $localStorage.lists;
+      // };
+      //
+      // // Saves list data from controller to local storage.
+      // self.saveListData = function() {
+      //   $localStorage.lists = self.lists;
+      // };
 
       // Adds a new, empty list that should be visible and sets the title.
       self.addList = function(listTitle) {
@@ -92,6 +114,7 @@ class listsController {
       // Toggles whether the listItem should be in edit mode.
       // If num=1 then title is set to edit, 2 then description.
       self.toggleEdit = function(num, list, listItem) {
+        console.log(listItem);
         if (!listItem.editingTitle && num === 1) {
           listItem.editingTitle = true;
         } else if (!listItem.editingDesc && num === 2){
@@ -105,6 +128,7 @@ class listsController {
 
       self.copyListItem = function(listItem) {
         self.itemCopy = angular.copy(listItem);
+        console.log(self.itemCopy);
       };
 
       // Updates the list item in the specified list.
@@ -112,10 +136,10 @@ class listsController {
         var listIndex = self.lists.indexOf(list);
         var itemIndex = list.listItems.indexOf(listItem);
 
-        if (listItem.title === "") {
+        if (listItem.title === "" || listItem.title === undefined) {
           listItem.title = self.itemCopy.title;
         }
-        if (listItem.description === "") {
+        if (listItem.description === "" || listItem.description === undefined) {
           listItem.description = self.itemCopy.description;
         }
         var listItemCopy = angular.copy(listItem);
@@ -159,12 +183,8 @@ class listsController {
           }
         }
       };
-
       self.getLists();
-      if (typeof $localStorage.lists !== "undefined") {
-        self.loadListData();
-      }
-    }
+    };
   }
 
   export default listsController;

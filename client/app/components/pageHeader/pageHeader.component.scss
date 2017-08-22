@@ -5,9 +5,10 @@ li.pull-left {
   padding-left: .5em;
   padding-right: .5em;
   color: azure;
-  &.active.h5 {
-    font-size: 1.5em;
-  }
+}
+
+h5.active {
+  font-size: 1.5em;
 }
 
 #top-navbar {

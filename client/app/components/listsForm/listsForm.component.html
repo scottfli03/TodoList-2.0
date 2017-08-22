@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <div class="row pad-top">
-  <h4 ng-if="$ctrl.list.visible" class="col-sm-3 col-3 pull-left">{{$ctrl.list.title}}</h4>
+  <h4 ng-if="$ctrl.list.visible" class="col-sm-6 col-6 pull-left">{{$ctrl.list.title}}</h4>
   <div class="btn-group-sm col-sm-6 col-6 pull-right text-right" ng-switch="$ctrl.list.visible">
     <button ng-switch-when="true"
             ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
-            class="btn btn-primary glyphicon glyphicon-collapse-up dark">
+            class="btn btn-primary glyphicon glyphicon-collapse-up dark"
+            alt="collapse">
     </button
     ><button ng-switch-when="false"
              ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
-             class="btn btn-primary dark">{{$ctrl.list.title}}
+             class="btn btn-primary dark"
+             alt="$ctrl.list.title">{{$ctrl.list.title}}
+             <span ng-if="$ctrl.listType==='incomplete'" class="badge">
+               {{($ctrl.list.listItems|filter:{completed:false}).length}}
+             </span>
     </button
     ><button ng-switch-when="undefined"
              ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
              class="btn btn-primary glyphicon glyphicon-collapse-up dark">
     </button
-    ><button ng-if="$ctrl.list.visible"
+    ><button ng-if="$ctrl.listType==='incomplete' && $ctrl.list.visible"
              class="btn btn-default glyphicon glyphicon-trash dark"
-             ng-click="$ctrl.removeList({list:$ctrl.list})">
+             ng-click="$ctrl.removeList({list:$ctrl.list})"
+             alt="delete list">
     </button>
   </div>
 </div>
@@ -24,23 +30,27 @@
   <!-- If listType is Completed and the is at least one item -->
 
 
-  <div class="row table-bordered hidden-xs">
+  <div class="row table-bordered">
     <div ng-if="$ctrl.listType==='completed'
            && ($ctrl.list.listItems|filter:{completed:true}).length>0">
-      <header class="col-xs-1 col-1 text-center">&nbsp</header>
-      <header class="col-xs-3 col-3 text-center">Title</header>
-      <header class="col-xs-7 col-7 text-center">Description</header>
+      <div class="hidden-xs">
+        <header class="col-xs-3 col-sm-3 col-3"><strong>List Item</strong></header>
+        <header class="col-xs-7 col-sm-7 col-7"><strong>Description</strong></header>
+        <header class="col-xs-4 col-sm-3 col-2">&nbsp</header>
+      </div>
     </div>
     <div ng-if="$ctrl.listType==='incomplete'">
-      <header class="col-xs-1 col-1 text-center">&nbsp</header>
-      <header class="col-xs-3 col-3 text-center">Title</header>
-      <header class="col-xs-7 col-7 text-center">Description</header>
+      <div class="hidden-xs">
+        <header class="col-xs-3 col-sm-3 col-3"><strong>List Item</strong></header>
+        <header class="col-xs-7 col-sm-7 col-7"><strong>Description</strong></header>
+        <header class="col-xs-4 col-sm-2 col-2">&nbsp</header>
+      </div>
     </div>
     <div class="col-sm-12"
          ng-if="$ctrl.listType==='completed'
          && ($ctrl.list.listItems|filter:{completed:true}).length===0">
       No Completed Items for this List.
-      &nbspThere are {{($ctrl.list.listItems|filter:completed:true).length}}
+      <br>{{($ctrl.list.listItems|filter:completed:true).length}}
       items left to complete.
     </div>
   </div>
@@ -57,13 +67,7 @@
     <!-- Title shown as either:
         1)As Text if not editing.
         2)Textbox if editing. (updates on blur) -->
-    <div class="btn-group-lg pull-left btn-controls hidden-xs">
-      <button class="btn-danger glyphicon glyphicon-remove text-center" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
-      ><button class="btn-success glyphicon glyphicon-ok"
-               ng-click="$ctrl.toggleCompleted({listItem:listItem});">
-    </button>
-    </div>
-    <p href class="col-xs-6 col-sm-3 cell"
+    <p href class="col-xs-6 col-sm-3"
             ng-if="listItem.editingTitle === false"
             ng-click="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});
             $ctrl.copyListItem({listItem:listItem});
@@ -71,13 +75,6 @@
       <label class="visible-xs-inline">Title:&nbsp
       </label>{{listItem.title}}
     </p>
-    <div class="btn-group-lg pull-right btn-controls visible-xs-inline pad-right">
-      <button class="btn-danger glyphicon glyphicon-remove text-center dark" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
-      ><button class="btn-success glyphicon glyphicon-ok dark"
-               ng-click="$ctrl.toggleCompleted({listItem:listItem});">
-    </button>
-    </div>
-
     <input class="col-xs-12 col-sm-3 cell"
            ng-if="listItem.editingTitle === true"
            type="text" id="{{$ctrl.list.title}}-item-title-edit{{$index}}"
@@ -92,6 +89,7 @@
             id="desc-edit{{$index}}"
             ng-if="listItem.editingDesc !== true && listItem.description.length>0"
             ng-click="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});
+              $ctrl.copyListItem({listItem:listItem});
               $ctrl.setFocus({id:$ctrl.list.title + '-item-desc-edit' + $index});"
             class="cellListData">
       <label class="visible-xs-inline">Desc:&nbsp
@@ -104,7 +102,20 @@
            value="{{listItem.description}}"
            ng-model="listItem.description"
            ng-blur="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});" />
+     <div class="btn-group-lg pull-right text-right btn-controls visible-sm visible-xs col-xs-4 col-sm-2 col-2">
+       <button class="btn-danger glyphicon glyphicon-remove text-center dark" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
+       ><button class="btn-success glyphicon glyphicon-ok dark"
+                ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+       </button>
+     </div>
+     <div class="btn-group-lg pull-right text-right btn-controls hidden-xs hidden-sm col-xs-4 col-sm-2 col-2">
+       <button class="btn-danger glyphicon glyphicon-remove text-center dark" ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});"></button
+       ><button class="btn-success glyphicon glyphicon-ok dark"
+                ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+       </button>
+     </div>
   </div>
+
     <!-- Row for new List Items. Row hidden when completed list -->
   <div ng-hide="$ctrl.listType==='completed'" class="row">
     <form name="listSetForm{{$index}}"
@@ -113,10 +124,9 @@
             && $ctrl.addListItem($ctrl.list);
           listSetForm.$setPristine();
           $ctrl.setFocus({id:$ctrl.list.title + '-txt-add-title'});"
-          class="form-group form-inline col-sm-12 col-12" novalidate>
-      <div
-       class="input-group input-group-sm col-sm-5 col-12">
-        <label for="{{$ctrl.list.title}}-txt-add-title" class="input-group-addon">Title:</label>
+          class="form-group form-inline col-sm-12" novalidate>
+      <div class="input-group input-group-sm col-xs-12 col-sm-3 col-3">
+        <label for="{{$ctrl.list.title}}-txt-add-title" class="input-group-addon">Title:&nbsp</label>
         <input class="title form-control"
                type="text"
                id="{{$ctrl.list.title}}-txt-add-title"
@@ -124,15 +134,19 @@
                ng-model="$ctrl.list.newItem.title"
                required>
       </div
-      ><div class="input-group input-group-sm col-sm-7 col-12">
+      ><div class="input-group input-group-sm col-xs-12 col-sm-9 col-9">
         <span for="desc" class="input-group-addon">Desc:</span>
         <input type="text"
                class="form-control"
-               id="desc" name="txtDesc"
+               id="desc"
+               name="txtDesc"
                ng-model="$ctrl.list.newItem.description"
                required>
         <div class="input-group-btn">
-          <button class="btn btn-secondary glyphicon glyphicon-plus" id="submit-button" type="submit" ng-disabled="!listSetForm.$valid"></button>
+          <button class="btn btn-secondary glyphicon glyphicon-plus"
+                  id="submit-button"
+                  type="submit"
+                  ng-disabled="!listSetForm.$valid"></button>
         </div>
       </div>
     </form>

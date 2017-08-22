@@ -32,6 +32,7 @@ angular.module('app', [
       listType: 'incomplete'
     }
   }
+  $urlRouterProvider.when('', '/incomplete')
   var incompleteState = {
     name: 'incomplete',
     url: '/incomplete',
