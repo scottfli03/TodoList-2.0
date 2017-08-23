@@ -10,9 +10,11 @@ import * as uiRouter from 'angular-ui-router';
 import * as ngBootbox from 'ngbootbox';
 import appComponent from './app.component';
 import ComponentsModule from './components/components';
+import ServicesModule from './services/services';
 
 angular.module('app', [
   ComponentsModule.name,
+  ServicesModule.name,
   'ui.router',
   'ngBootbox'
 ])

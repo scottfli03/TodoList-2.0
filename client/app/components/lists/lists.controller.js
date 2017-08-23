@@ -5,7 +5,8 @@ class listsController {
                 $state,
                 $ngBootbox,
                 $timeout,
-                $window) {
+                $window,
+                listCRUDService) {
       this.name = 'lists';
       var self = this;
       self.itemCopy = {};
@@ -14,14 +15,12 @@ class listsController {
       self.listType = $state.current.data.listType;
 
       self.getLists = function() {
-        $http.get('http://www.todolist.com:8081/mvcapp/list/all').then(function(res){
-          self.lists = res.data;
+        listCRUDService.getAllListData().then(function(result) {
+          self.lists = result;
           self.initializeLists();
         });
-      }
-
-      // var listItem = {};
-      // var list = {};
+      };
+      
       self.initializeLists = function() {
         for (var i = 0; i < self.lists.length; i++) {
           self.lists[i].visible = true;
@@ -31,7 +30,6 @@ class listsController {
             self.lists[i].listItems[a].editingDesc = false;
           }
         }
-        console.log(self.lists);
       }
 
       // Gets the lists either from local storage or from the JSON file.
