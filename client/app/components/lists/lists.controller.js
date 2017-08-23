@@ -16,18 +16,16 @@ class listsController {
       self.getLists = function() {
         $http.get('http://www.todolist.com:8081/mvcapp/list/all').then(function(res){
           self.lists = res.data;
-          console.log("Got Lists");
           self.initializeLists();
         });
       }
 
-      var listItem = {};
-      var list = {};
+      // var listItem = {};
+      // var list = {};
       self.initializeLists = function() {
         for (var i = 0; i < self.lists.length; i++) {
-          console.log("outer loop");
           self.lists[i].visible = true;
-          for (var a = 0; i < self.lists[i].listItems.length; a++) {
+          for (var a = 0; a < self.lists[i].listItems.length; a++) {
             self.lists[i].listItems[a].completed = false;
             self.lists[i].listItems[a].editingTitle = false;
             self.lists[i].listItems[a].editingDesc = false;
@@ -90,8 +88,11 @@ class listsController {
       self.removeList = function(list) {
         $ngBootbox.confirm("Delete '" + list.title + "' list?")
           .then(function() {
-            var index = self.lists.indexOf(list);
-            self.lists.splice(index, 1);
+            // var index = self.lists.indexOf(list);
+            // self.lists.splice(index, 1);
+            $http.post('http://www.todolist.com:8081/mvcapp/list/delete/'+ list.listID).then(function(res){
+              console.log(res);
+            });
           }, function() {
           })
       };
