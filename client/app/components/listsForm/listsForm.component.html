@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <div class="row pad-top">
-  <h4 ng-if="$ctrl.list.visible" class="col-sm-6 col-6 pull-left">{{$ctrl.list.title}}</h4>
+  <h4 ng-if="$ctrl.list.visible"
+      class="col-sm-6 col-6 pull-left"
+      ng-click="$ctrl.updateList({list:$ctrl.list});">{{$ctrl.list.title}}</h4>
   <div class="btn-group-sm col-sm-6 col-6 pull-right text-right" ng-switch="$ctrl.list.visible">
     <button ng-switch-when="true"
             ng-click="$ctrl.toggleVisible({list:$ctrl.list})"
@@ -81,15 +83,16 @@
            name="txtEditTitle"
            value="{{listItem.title}}"
            ng-model="listItem.title"
-           ng-blur="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});" />
+           ng-blur="$ctrl.toggleEdit({num:1, list:$ctrl.list, listItem:listItem});
+                   $ctrl.updateListItem({list:$ctrl.list, listItem:listItem});" />
      <div class="btn-group-lg pull-right text-right btn-controls visible-sm visible-xs col-xs-4 col-sm-2 col-2">
        <button class="btn-danger glyphicon glyphicon-remove text-center dark"
                ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});">
        </button
        ><button class="btn-success glyphicon glyphicon-ok dark"
-                ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+                ng-click="$ctrl.toggleCompleted({listItem:listItem, listID:$ctrl.list.listID});">
        </button>
-     </div>   
+     </div>
   <!-- Description shown as either:
     1)Text if not editing.
     2)Textbox if editing (updates on blur) -->
@@ -98,8 +101,7 @@
             ng-if="listItem.editingDesc !== true && listItem.description.length>0"
             ng-click="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});
               $ctrl.copyListItem({listItem:listItem});
-              $ctrl.setFocus({id:$ctrl.list.title + '-item-desc-edit' + $index});"
-            class="cellListData">
+              $ctrl.setFocus({id:$ctrl.list.title + '-item-desc-edit' + $index});">
       <label class="visible-xs-inline">Desc:&nbsp
       </label>{{listItem.description}}
     </p>
@@ -109,13 +111,14 @@
            name="txtEditDesc"
            value="{{listItem.description}}"
            ng-model="listItem.description"
-           ng-blur="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});" />
+           ng-blur="$ctrl.toggleEdit({num:2, list:$ctrl.list, listItem:listItem});
+                   $ctrl.updateListItem({list:$ctrl.list, listItem:listItem});" />
      <div class="btn-group-lg pull-right text-right btn-controls hidden-xs hidden-sm col-xs-4 col-sm-2 col-2">
        <button class="btn-danger glyphicon glyphicon-remove text-center dark"
                ng-click="$ctrl.removeListItem({list:$ctrl.list, listItem:listItem});">
        </button
        ><button class="btn-success glyphicon glyphicon-ok dark"
-                ng-click="$ctrl.toggleCompleted({listItem:listItem});">
+                ng-click="$ctrl.toggleCompleted({listItem:listItem, listID:$ctrl.list.listID});">
        </button>
      </div>
   </div>
@@ -161,7 +164,8 @@
     && $ctrl.list.isNew===false">No items left to complete. Please add more items.</p>
 
   <!-- Form validation text -->
-  <span class="error-notification"
+  <span class="error-notification
+               bg-danger"
     ng-if="listSetForm.txtTitle.$invalid
       && listSetForm.txtTitle.$dirty
       || listSetForm.txtDesc.$invalid

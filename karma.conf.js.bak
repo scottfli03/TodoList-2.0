@@ -1,7 +1,5 @@
 // Karma configuration
-// Generated on Thu Aug 31 2017 12:58:38 GMT-0400 (EDT)
-var webpackConfig = require('./webpack.config.js');
-webpackConfig.entry = {};
+// Generated on Mon Jul 31 2017 10:26:16 GMT-0400 (EDT)
 
 module.exports = function(config) {
   config.set({
@@ -17,11 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'test-main.js'
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'client/app/app.module.js',
-      'test/*.spec.js',
-      'client/app/components/**/*.js',
+      'client/app/components/**/*spec.js',
+      'client/app/services/**/*spec.js'
     ],
 
 
@@ -29,26 +27,12 @@ module.exports = function(config) {
     exclude: [
     ],
 
+
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './dist/bundle.js': ['webpack'],
-      './client/app/app.module.js': ['babel'],
+
     },
-
-    webpack: webpackConfig,
-
-    webpackMiddleware: {
-      noInfo: true
-    },
-
-    plugins: ['karma-babel-preprocessor',
-              'karma-requirejs',
-              'karma-browserify',
-              'karma-jasmine',
-              'karma-chrome-launcher',
-              'karma-webpack',
-              'karma-phantomjs-launcher'],
 
 
     // test results reporter to use

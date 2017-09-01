@@ -32,8 +32,9 @@ if (isDev) {
       }, {
         test: [/fontawesome-webfont\.svg/, /fontawesome-webfont\.eot/, /fontawesome-webfont\.ttf/, /fontawesome-webfont\.woff/, /fontawesome-webfont\.woff2/],
         loader: 'file?name=fonts/[name].[ext]'
-      },
-        { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: 'url' }]
+      }, { test: /\.(ttf|otf|eot|svg|woff(2)?)$/, loader: 'url'
+      }, { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+    ]
     },
     plugins: [
 

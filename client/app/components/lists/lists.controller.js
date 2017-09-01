@@ -13,36 +13,35 @@ class listsController {
       self.listTitle = "";
       self.modalResponse = undefined;
       self.listType = $state.current.data.listType;
-
       self.getLists = function() {
         listCRUDService.getAllListData().then(function(result) {
           self.lists = result;
           self.initializeLists();
         });
       };
-      
+
       self.initializeLists = function() {
         for (var i = 0; i < self.lists.length; i++) {
-          self.lists[i].visible = true;
+          if (self.lists[i].visible === undefined) {
+            self.lists[i].visible = true;
+          }
           for (var a = 0; a < self.lists[i].listItems.length; a++) {
-            self.lists[i].listItems[a].completed = false;
             self.lists[i].listItems[a].editingTitle = false;
             self.lists[i].listItems[a].editingDesc = false;
           }
         }
       }
 
-      // Gets the lists either from local storage or from the JSON file.
-      // self.getLists = function() {
-      //   if (typeof $localStorage.lists === "undefined") {
-      //     $http.get('assets/json/lists.json').then(function(res){
-      //       self.lists = res.data;
-      //       self.saveListData();
-      //     });
-      //   } else {
-      //     self.lists = localStorage.lists;
-      //   }
-      // };
+      self.initializeNewList = function(list) {
+        list.isNew = true;
+        list.visible = true;
+      }
+
+      self.initializeNewListItem = function(listItem) {
+        listItem.isSelected = false;
+        listItem.editingTitle = false;
+        listItem.editingDesc = false;
+      }
 
       // Sets if the list should be visible in the view.
       self.toggleVisible = function(list) {
@@ -62,58 +61,39 @@ class listsController {
         };
       };
 
-      // // Sets lists from local storage as lists in controller.
-      // self.loadListData = function() {
-      //   self.lists = $localStorage.lists;
-      // };
-      //
-      // // Saves list data from controller to local storage.
-      // self.saveListData = function() {
-      //   $localStorage.lists = self.lists;
-      // };
-
       // Adds a new, empty list that should be visible and sets the title.
       self.addList = function(listTitle) {
-        self.lists.push({title: listTitle,
-          isNew: true,
-          listItems: [],
-          visible: true
+        var list = {title: listTitle};
+        listCRUDService.addList(list).then(function() {
+          self.getLists();
         });
-        self.listTitle = undefined;
       };
 
       // Removes the specified list
       self.removeList = function(list) {
         $ngBootbox.confirm("Delete '" + list.title + "' list?")
           .then(function() {
-            // var index = self.lists.indexOf(list);
-            // self.lists.splice(index, 1);
-            $http.post('http://www.todolist.com:8081/mvcapp/list/delete/'+ list.listID).then(function(res){
-              console.log(res);
+              listCRUDService.deleteList(list.listID).then(function(result) {
+                self.getLists();
+              });
             });
-          }, function() {
-          })
       };
 
-      // Adds a list item by passing the list
-      // with a newItem variable contained in it.
+
       self.addListItem = function(list) {
-        var newItem = list.newItem;
-        newItem.isSelected = false;
-        newItem.completed = false;
-        newItem.editingTitle = false;
-        newItem.editingDesc = false;
-        list.isNew = false;
-        var newItemCopy = angular.copy(newItem);
-        list.listItems.push(newItemCopy);
-        list.newItem.title = undefined;
-        list.newItem.description = undefined;
+        list.newItem.completed = false;
+        var newItemCopy = angular.copy(list.newItem);
+        var itemID;
+        listCRUDService.addListItem(newItemCopy, list.listID).then(function(listItemID) {
+          self.getLists();
+        });
+        setTimeout(function() {
+        }, 500);
       };
 
       // Toggles whether the listItem should be in edit mode.
       // If num=1 then title is set to edit, 2 then description.
       self.toggleEdit = function(num, list, listItem) {
-        console.log(listItem);
         if (!listItem.editingTitle && num === 1) {
           listItem.editingTitle = true;
         } else if (!listItem.editingDesc && num === 2){
@@ -122,12 +102,10 @@ class listsController {
           listItem.editingTitle = false;
           listItem.editingDesc = false;
         }
-        self.updateListItem(list, listItem);
       };
 
       self.copyListItem = function(listItem) {
         self.itemCopy = angular.copy(listItem);
-        console.log(self.itemCopy);
       };
 
       // Updates the list item in the specified list.
@@ -142,13 +120,25 @@ class listsController {
           listItem.description = self.itemCopy.description;
         }
         var listItemCopy = angular.copy(listItem);
-        self.lists[listIndex].listItems[itemIndex] = listItem;
+        listCRUDService.updateListItem(listItemCopy, list.listID).then(function() {
+          self.getLists();
+        });
       };
+
+      self.updateList = function(list) {
+        $ngBootbox.confirm("Enter new title")
+          .then(function() {
+            listCRUDService.updateList(list).then(function(result) {
+              self.getLists();
+            });
+          });
+      }
 
       //Used to set focus on items in the view based on their ID.
       self.setFocus = function(id) {
-        console.log("Focusing on: "+id);
         return $timeout(function() {
+          console.log("Attempting to set focus on:");
+          console.log(id);
           var element = $window.document.getElementById(id);
           if (element) {
             element.focus();
@@ -157,31 +147,33 @@ class listsController {
       }
 
       self.removeListItem = function(list, listItem) {
-        var listIndex = self.lists.indexOf(list);
-        var itemIndex = list.listItems.indexOf(listItem);
-        self.lists[listIndex].listItems.splice(itemIndex, 1);
+        listCRUDService.deleteListItem(listItem.itemID).then(function() {
+          self.getLists();
+        });
       };
 
-      self.toggleCompleted = function(listItem) {
-        console.log(listItem);
+      self.toggleCompleted = function(listItem, listID) {
         if (!listItem.completed) {
           listItem.completed = true;
         } else {
           listItem.completed = false;
         }
+        var listItemCopy = angular.copy(listItem);
+        listCRUDService.updateListItem(listItemCopy, listID).then(function() {
+          self.getLists();
+        });
       };
 
-      var setUnSelected = function() {
-        var listsLength = self.lists.length;
-        var i, a, theList, liLength;
-        for (i = 0; i < listsLength; i++) {
-          theList = self.lists[i];
-          liLength = theList.listItems.length;
-          for (a = 0; a < liLength; a++) {
-            theList.listItems[a].isSelected = false;
-          }
-        }
-      };
+      // var setUnSelected = function() {
+      //   var listsLength = self.lists.length;
+      //   var i, a, theList, liLength;
+      //   for (i = 0; i < listsLength; i++) {
+      //     self.lists[i].listItems.length;
+      //     for (a = 0; a < liLength; a++) {
+      //       theList.listItems[a].isSelected = false;
+      //     }
+      //   }
+      // };
       self.getLists();
     };
   }

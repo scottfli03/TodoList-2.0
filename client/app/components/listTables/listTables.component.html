@@ -1,14 +1,19 @@
 <!DOCTYPE html>
+<div ng-if="$ctrl.lists == false">
+  <h3>Start a list by entering a title below.</h3>
+</div>
 <lists-form list="list"
+            lists="$ctrl.lists"
             new-item="$ctrl.newItem"
             list-type="$ctrl.listType"
             add-list-item="$ctrl.addListItem({list:list})"
             remove-list="$ctrl.removeList({list:list})"
             remove-list-item="$ctrl.removeListItem({list:list, listItem:listItem})"
             update-list-item="$ctrl.updateListItem({list:list, listItem:listItem})"
-            toggle-completed="$ctrl.toggleCompleted({listItem:listItem})"
+            toggle-completed="$ctrl.toggleCompleted({listItem:listItem, listID:listID})"
             set-focus="$ctrl.setFocus({id:id})"
             copy-list-item="$ctrl.copyListItem({listItem:listItem})"
+            update-list="$ctrl.updateList({list:list})"
             toggle-edit="$ctrl.toggleEdit({num:num, list:list, listItem:listItem})"
             toggle-visible="$ctrl.toggleVisible({list:list})"
             ng-repeat="list in $ctrl.lists | filter: $ctrl.incompleteFilter">
